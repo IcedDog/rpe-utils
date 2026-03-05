@@ -71,13 +71,7 @@ export type NotePredicate = (
 ) => boolean;
 
 /** A process function on a Note. */
-export type NoteProcess = (
-  note: Note,
-  line: JudgeLine,
-  chart: RpeJson,
-  noteIndex: number,
-  lineIndex: number
-) => void;
+export type NoteProcess = (note: Note, line: JudgeLine, chart: RpeJson, noteIndex: number, lineIndex: number) => void;
 
 /** A predicate function on a JudgeLine. */
 export type LinePredicate = (line: JudgeLine, index: number, chart: RpeJson) => boolean;
@@ -104,15 +98,7 @@ export type EventProcess = (
 ) => void;
 
 /** Identifies which event channel an event belongs to. */
-export type EventChannelType =
-  | "moveX"
-  | "moveY"
-  | "rotate"
-  | "alpha"
-  | "speed"
-  | "incline"
-  | "scaleX"
-  | "scaleY";
+export type EventChannelType = "moveX" | "moveY" | "rotate" | "alpha" | "speed" | "incline" | "scaleX" | "scaleY";
 
 // ─── Predicate Combinators ───────────────────────────────────────────────────
 
@@ -369,9 +355,7 @@ export class NoteIterator {
    */
   onLineNamed(nameOrPattern: string | RegExp): this {
     return this.onLines((line) =>
-      typeof nameOrPattern === "string"
-        ? line.Name === nameOrPattern
-        : nameOrPattern.test(line.Name)
+      typeof nameOrPattern === "string" ? line.Name === nameOrPattern : nameOrPattern.test(line.Name)
     );
   }
 
@@ -539,14 +523,7 @@ export class NoteIterator {
    * The callback receives `(note, line, chart, noteIndex, lineIndex, globalIndex)`.
    */
   processIndexed(
-    fn: (
-      note: Note,
-      line: JudgeLine,
-      chart: RpeJson,
-      noteIndex: number,
-      lineIndex: number,
-      globalIndex: number
-    ) => void
+    fn: (note: Note, line: JudgeLine, chart: RpeJson, noteIndex: number, lineIndex: number, globalIndex: number) => void
   ): this {
     let globalIndex = 0;
     return this.process((note, line, chart, ni, li) => {
@@ -690,9 +667,7 @@ export class LineIterator {
   /** Match lines by exact name or RegExp. */
   named(nameOrPattern: string | RegExp): this {
     return this.addCondition((line) =>
-      typeof nameOrPattern === "string"
-        ? line.Name === nameOrPattern
-        : nameOrPattern.test(line.Name)
+      typeof nameOrPattern === "string" ? line.Name === nameOrPattern : nameOrPattern.test(line.Name)
     );
   }
 
@@ -802,9 +777,7 @@ export class LineIterator {
    * Collect all matching lines.
    */
   collect(chart: RpeJson): JudgeLine[] {
-    return chart.judgeLineList.filter((line, index) =>
-      this._conditions.every((c) => c(line, index, chart))
-    );
+    return chart.judgeLineList.filter((line, index) => this._conditions.every((c) => c(line, index, chart)));
   }
 
   /**
@@ -834,12 +807,7 @@ export function lineIterator(): LineIterator {
  * `'all'` covers everything; `'layer'` covers only layered events;
  * `'extended'` covers incline, scaleX, scaleY.
  */
-export type EventChannelFilter =
-  | "all"
-  | "layer"
-  | "extended"
-  | EventChannelType
-  | EventChannelType[];
+export type EventChannelFilter = "all" | "layer" | "extended" | EventChannelType | EventChannelType[];
 
 /**
  * Fluent iterator that filters and transforms events across all lines.
@@ -996,42 +964,10 @@ export class EventIterator {
       ) {
         line.eventLayers.forEach((layer, layerIndex) => {
           if (!layer) return;
-          count += this._runOnLayerChannel(
-            layer,
-            "moveX",
-            layer.moveXEvents,
-            layerIndex,
-            line,
-            chart,
-            channelSet
-          );
-          count += this._runOnLayerChannel(
-            layer,
-            "moveY",
-            layer.moveYEvents,
-            layerIndex,
-            line,
-            chart,
-            channelSet
-          );
-          count += this._runOnLayerChannel(
-            layer,
-            "rotate",
-            layer.rotateEvents,
-            layerIndex,
-            line,
-            chart,
-            channelSet
-          );
-          count += this._runOnLayerChannel(
-            layer,
-            "alpha",
-            layer.alphaEvents,
-            layerIndex,
-            line,
-            chart,
-            channelSet
-          );
+          count += this._runOnLayerChannel(layer, "moveX", layer.moveXEvents, layerIndex, line, chart, channelSet);
+          count += this._runOnLayerChannel(layer, "moveY", layer.moveYEvents, layerIndex, line, chart, channelSet);
+          count += this._runOnLayerChannel(layer, "rotate", layer.rotateEvents, layerIndex, line, chart, channelSet);
+          count += this._runOnLayerChannel(layer, "alpha", layer.alphaEvents, layerIndex, line, chart, channelSet);
           count += this._runOnLayerChannel(
             layer,
             "speed",
@@ -1181,9 +1117,7 @@ export function forEachEvent(
       if (channelSet.has("alpha") && layer.alphaEvents)
         layer.alphaEvents.forEach((ev) => fn(ev, "alpha", layerIndex, line));
       if (channelSet.has("speed") && layer.speedEvents)
-        (layer.speedEvents as unknown as Event[]).forEach((ev) =>
-          fn(ev, "speed", layerIndex, line)
-        );
+        (layer.speedEvents as unknown as Event[]).forEach((ev) => fn(ev, "speed", layerIndex, line));
     });
     if (line.extended) {
       if (channelSet.has("incline") && line.extended.inclineEvents)

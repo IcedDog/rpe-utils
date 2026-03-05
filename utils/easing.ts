@@ -101,25 +101,15 @@ export const EASINGS: ((x: number) => number)[] = [
   /* 20 BackOut      */ (x) => 1 + 2.70158 * Math.pow(x - 1, 3) + 1.70158 * Math.pow(x - 1, 2),
   /* 21 BackIn       */ (x) => 2.70158 * x * x * x - 1.70158 * x * x,
   /* 22 CircInOut    */ (x) =>
-    x < 0.5
-      ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2
-      : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2,
+    x < 0.5 ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2 : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2,
   /* 23 BackInOut    */ (x) =>
     x < 0.5
       ? (Math.pow(2 * x, 2) * ((2.59491 + 1) * 2 * x - 2.59491)) / 2
       : (Math.pow(2 * x - 2, 2) * ((2.59491 + 1) * (x * 2 - 2) + 2.59491) + 2) / 2,
   /* 24 ElasticOut   */ (x) =>
-    x === 0
-      ? 0
-      : x === 1
-        ? 1
-        : Math.pow(2, -10 * x) * Math.sin((x * 10 - 0.75) * ((2 * Math.PI) / 3)) + 1,
+    x === 0 ? 0 : x === 1 ? 1 : Math.pow(2, -10 * x) * Math.sin((x * 10 - 0.75) * ((2 * Math.PI) / 3)) + 1,
   /* 25 ElasticIn    */ (x) =>
-    x === 0
-      ? 0
-      : x === 1
-        ? 1
-        : -Math.pow(2, 10 * x - 10) * Math.sin((x * 10 - 10.75) * ((2 * Math.PI) / 3)),
+    x === 0 ? 0 : x === 1 ? 1 : -Math.pow(2, 10 * x - 10) * Math.sin((x * 10 - 10.75) * ((2 * Math.PI) / 3)),
   /* 26 BounceOut    */ (x) =>
     x < 1 / 2.75
       ? 7.5625 * x * x
@@ -129,8 +119,7 @@ export const EASINGS: ((x: number) => number)[] = [
           ? 7.5625 * (x -= 2.25 / 2.75) * x + 0.9375
           : 7.5625 * (x -= 2.625 / 2.75) * x + 0.984375,
   /* 27 BounceIn     */ (x) => 1 - EASINGS[25]!(1 - x),
-  /* 28 BounceInOut  */ (x) =>
-    x < 0.5 ? (1 - EASINGS[25]!(1 - 2 * x)) / 2 : (1 + EASINGS[25]!(2 * x - 1)) / 2,
+  /* 28 BounceInOut  */ (x) => (x < 0.5 ? (1 - EASINGS[25]!(1 - 2 * x)) / 2 : (1 + EASINGS[25]!(2 * x - 1)) / 2),
 ];
 
 // ─── Parameter Sanitization ──────────────────────────────────────────────────
@@ -162,12 +151,7 @@ export function sanitizeEasingParams(
  * Evaluate easing value at progress x, with optional sub-range [easingLeft, easingRight].
  * This maps x ∈ [0,1] through the easing curve restricted to the sub-range.
  */
-export function calculateEasingValue(
-  func: (x: number) => number,
-  x: number,
-  easingLeft = 0,
-  easingRight = 1
-): number {
+export function calculateEasingValue(func: (x: number) => number, x: number, easingLeft = 0, easingRight = 1): number {
   const progress = func(easingLeft + (easingRight - easingLeft) * x);
   const progressStart = func(easingLeft);
   const progressEnd = func(easingRight);
@@ -199,13 +183,7 @@ export function calculateEasingValue(
  * easing(1, 0.5, 0, 1, [0.4, 0, 0.2, 1]); // Custom bezier
  * ```
  */
-export function easing(
-  type: number,
-  x: number,
-  easingLeft = 0,
-  easingRight = 1,
-  bezierPoints?: number[]
-): number {
+export function easing(type: number, x: number, easingLeft = 0, easingRight = 1, bezierPoints?: number[]): number {
   const useBezier = bezierPoints && bezierPoints.length >= 4;
   const bezierFunc = useBezier
     ? cubicBezier(...(bezierPoints.slice(0, 4) as [number, number, number, number]))
@@ -269,49 +247,30 @@ const EASING_INTEGRALS: ((x: number) => number)[] = [
   (x) => Math.pow(x, 4) / 4,
   (x) => 2 * x * x - 2 * Math.pow(x, 3) + Math.pow(x, 4) - Math.pow(x, 5) / 5,
   (x) => Math.pow(x, 5) / 5,
-  (x) =>
-    x < 0.5 ? Math.pow(x, 4) : -3 * x + 6 * x * x - 4 * Math.pow(x, 3) + Math.pow(x, 4) + 0.5,
+  (x) => (x < 0.5 ? Math.pow(x, 4) : -3 * x + 6 * x * x - 4 * Math.pow(x, 3) + Math.pow(x, 4) + 0.5),
   (x) =>
     x < 0.5
       ? (8 / 5) * Math.pow(x, 5)
-      : -7 * x +
-        16 * x * x -
-        16 * Math.pow(x, 3) +
-        8 * Math.pow(x, 4) -
-        (8 / 5) * Math.pow(x, 5) +
-        11 / 10,
-  (x) =>
-    (5 / 2) * x * x -
-    (10 / 3) * Math.pow(x, 3) +
-    (5 / 2) * Math.pow(x, 4) -
-    Math.pow(x, 5) +
-    Math.pow(x, 6) / 6,
+      : -7 * x + 16 * x * x - 16 * Math.pow(x, 3) + 8 * Math.pow(x, 4) - (8 / 5) * Math.pow(x, 5) + 11 / 10,
+  (x) => (5 / 2) * x * x - (10 / 3) * Math.pow(x, 3) + (5 / 2) * Math.pow(x, 4) - Math.pow(x, 5) + Math.pow(x, 6) / 6,
   (x) => Math.pow(x, 6) / 6,
   (x) => x - (1 - Math.pow(2, -10 * x)) / (10 * Math.LN2),
   (x) => (Math.pow(2, 10 * x - 10) - Math.pow(2, -10)) / (10 * Math.LN2),
-  (x) =>
-    0.5 * ((x - 1) * Math.sqrt(Math.max(0, 1 - Math.pow(x - 1, 2))) + Math.asin(x - 1)) +
-    Math.PI / 4,
-  (x) =>
-    x - 0.5 * (x * Math.sqrt(Math.max(0, 1 - x * x)) + Math.asin(Math.max(-1, Math.min(1, x)))),
+  (x) => 0.5 * ((x - 1) * Math.sqrt(Math.max(0, 1 - Math.pow(x - 1, 2))) + Math.asin(x - 1)) + Math.PI / 4,
+  (x) => x - 0.5 * (x * Math.sqrt(Math.max(0, 1 - x * x)) + Math.asin(Math.max(-1, Math.min(1, x)))),
   // 20 BackOut
   (x) => {
     const a = 2.70158;
     const b = 1.70158;
     return (
-      (1 - a + b) * x +
-      ((3 * a - 2 * b) / 2) * x * x +
-      ((-3 * a + b) / 3) * Math.pow(x, 3) +
-      (a / 4) * Math.pow(x, 4)
+      (1 - a + b) * x + ((3 * a - 2 * b) / 2) * x * x + ((-3 * a + b) / 3) * Math.pow(x, 3) + (a / 4) * Math.pow(x, 4)
     );
   },
   (x) => (2.70158 / 4) * Math.pow(x, 4) - (1.70158 / 3) * Math.pow(x, 3),
   // 22 CircInOut
   (x) =>
     x < 0.5
-      ? 0.5 * x -
-        0.25 * x * Math.sqrt(Math.max(0, 1 - 4 * x * x)) -
-        0.125 * Math.asin(Math.max(-1, Math.min(1, 2 * x)))
+      ? 0.5 * x - 0.25 * x * Math.sqrt(Math.max(0, 1 - 4 * x * x)) - 0.125 * Math.asin(Math.max(-1, Math.min(1, 2 * x)))
       : 0.5 * x -
         0.25 * (1 - x) * Math.sqrt(Math.max(0, 1 - 4 * (1 - x) * (1 - x))) -
         0.125 * Math.asin(Math.max(-1, Math.min(1, 2 * (1 - x)))),
@@ -322,10 +281,7 @@ const EASING_INTEGRALS: ((x: number) => number)[] = [
     if (x <= 0.5) return (s + 1) * Math.pow(x, 4) - (2 * s * Math.pow(x, 3)) / 3;
     const Ihalf = (s + 1) * Math.pow(0.5, 4) - (2 * s * Math.pow(0.5, 3)) / 3;
     const F = (t: number) =>
-      (s + 1) * Math.pow(t, 4) -
-      ((10 * s + 12) / 3) * Math.pow(t, 3) +
-      ((8 * s + 12) / 2) * t * t -
-      (2 * s + 3) * t;
+      (s + 1) * Math.pow(t, 4) - ((10 * s + 12) / 3) * Math.pow(t, 3) + ((8 * s + 12) / 2) * t * t - (2 * s + 3) * t;
     return Ihalf + (F(x) - F(0.5));
   },
   // 24 ElasticOut
@@ -346,8 +302,7 @@ const EASING_INTEGRALS: ((x: number) => number)[] = [
     const B = -10.75 * ((2 * Math.PI) / 3);
     const C = Math.pow(2, -10);
     const G = (t: number) =>
-      (-C * Math.exp(K * t) * (K * Math.sin(A * t + B) - A * Math.cos(A * t + B))) /
-      (A * A + K * K);
+      (-C * Math.exp(K * t) * (K * Math.sin(A * t + B) - A * Math.cos(A * t + B))) / (A * A + K * K);
     return G(x) - G(0);
   },
   // 26 BounceOut
@@ -362,13 +317,10 @@ const EASING_INTEGRALS: ((x: number) => number)[] = [
     const c3 = 2.625 / 2.75;
     const I_b1 = (A * Math.pow(b1, 3)) / 3;
     const I_b2 = I_b1 + (A / 3) * (Math.pow(b2 - c1, 3) - Math.pow(b1 - c1, 3)) + 0.75 * (b2 - b1);
-    const I_b3 =
-      I_b2 + (A / 3) * (Math.pow(b3 - c2, 3) - Math.pow(b2 - c2, 3)) + 0.9375 * (b3 - b2);
+    const I_b3 = I_b2 + (A / 3) * (Math.pow(b3 - c2, 3) - Math.pow(b2 - c2, 3)) + 0.9375 * (b3 - b2);
     if (x < b1) return (A * Math.pow(x, 3)) / 3;
-    if (x < b2)
-      return I_b1 + (A / 3) * (Math.pow(x - c1, 3) - Math.pow(b1 - c1, 3)) + 0.75 * (x - b1);
-    if (x < b3)
-      return I_b2 + (A / 3) * (Math.pow(x - c2, 3) - Math.pow(b2 - c2, 3)) + 0.9375 * (x - b2);
+    if (x < b2) return I_b1 + (A / 3) * (Math.pow(x - c1, 3) - Math.pow(b1 - c1, 3)) + 0.75 * (x - b1);
+    if (x < b3) return I_b2 + (A / 3) * (Math.pow(x - c2, 3) - Math.pow(b2 - c2, 3)) + 0.9375 * (x - b2);
     return I_b3 + (A / 3) * (Math.pow(x - c3, 3) - Math.pow(b3 - c3, 3)) + 0.984375 * (x - b3);
   },
   // 27 BounceIn
@@ -398,12 +350,7 @@ const EASING_INTEGRALS: ((x: number) => number)[] = [
  * @param easingLeft - Left sub-range boundary.
  * @param easingRight - Right sub-range boundary.
  */
-export function calculateEasingIntegral(
-  type: number,
-  x: number,
-  easingLeft = 0,
-  easingRight = 1
-): number {
+export function calculateEasingIntegral(type: number, x: number, easingLeft = 0, easingRight = 1): number {
   const p = sanitizeEasingParams(type, x, easingLeft, easingRight);
   const l = p.easingLeft;
   const r = p.easingRight;
@@ -412,9 +359,7 @@ export function calculateEasingIntegral(
   const integralFunc = EASING_INTEGRALS[p.type - 1]!;
   const denom = easingFunc(r) - easingFunc(l);
   if (!Number.isFinite(denom) || Math.abs(denom) < 1e-15) return (p.x * p.x) / 2;
-  return (
-    (integralFunc(scaledX) - integralFunc(l) - easingFunc(l) * (scaledX - l)) / ((r - l) * denom)
-  );
+  return (integralFunc(scaledX) - integralFunc(l) - easingFunc(l) * (scaledX - l)) / ((r - l) * denom);
 }
 
 // ─── Cubic Bezier ────────────────────────────────────────────────────────────
@@ -444,10 +389,8 @@ export function calculateEasingIntegral(
  */
 export function cubicBezier(x1: number, y1: number, x2: number, y2: number): (t: number) => number {
   // Newton's method to find the t parameter for a given x
-  const sampleCurveX = (t: number) =>
-    ((1 - 3 * x2 + 3 * x1) * t + (3 * x2 - 6 * x1)) * t * (t + 3 * x1 * t);
-  const sampleCurveY = (t: number) =>
-    ((1 - 3 * y2 + 3 * y1) * t + (3 * y2 - 6 * y1)) * t * (t + 3 * y1 * t);
+  const sampleCurveX = (t: number) => ((1 - 3 * x2 + 3 * x1) * t + (3 * x2 - 6 * x1)) * t * (t + 3 * x1 * t);
+  const sampleCurveY = (t: number) => ((1 - 3 * y2 + 3 * y1) * t + (3 * y2 - 6 * y1)) * t * (t + 3 * y1 * t);
 
   // More accurate bezier implementation
   const cx = 3 * x1;

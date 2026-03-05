@@ -206,13 +206,8 @@ export function removeEffect(extra: PhiraExtra, index: number): PhiraExtra {
  * @param shader - Shader name to search for.
  * @returns Array of matching effects with their indices.
  */
-export function findEffects(
-  extra: PhiraExtra,
-  shader: string
-): { index: number; effect: ShaderEffect }[] {
-  return extra.effects
-    .map((effect, index) => ({ index, effect }))
-    .filter(({ effect }) => effect.shader === shader);
+export function findEffects(extra: PhiraExtra, shader: string): { index: number; effect: ShaderEffect }[] {
+  return extra.effects.map((effect, index) => ({ index, effect })).filter(({ effect }) => effect.shader === shader);
 }
 
 /**
@@ -222,10 +217,7 @@ export function findEffects(
  * @param beat - Beat to check.
  * @returns Array of active effects with their indices.
  */
-export function findActiveEffects(
-  extra: PhiraExtra,
-  beat: number
-): { index: number; effect: ShaderEffect }[] {
+export function findActiveEffects(extra: PhiraExtra, beat: number): { index: number; effect: ShaderEffect }[] {
   return extra.effects
     .map((effect, index) => ({ index, effect }))
     .filter(({ effect }) => {
@@ -354,13 +346,7 @@ export function animateValue(
     return [scalarEvent(startBeat, endBeat, from, to, easingType)];
   }
   return [
-    vectorEvent(
-      startBeat,
-      endBeat,
-      Array.isArray(from) ? from : [from],
-      Array.isArray(to) ? to : [to],
-      easingType
-    ),
+    vectorEvent(startBeat, endBeat, Array.isArray(from) ? from : [from], Array.isArray(to) ? to : [to], easingType),
   ];
 }
 
@@ -405,13 +391,7 @@ export function keyframesToAnimatedVariable(
       events.push(scalarEvent(beatA, beatB, valA, valB, easingType));
     } else {
       events.push(
-        vectorEvent(
-          beatA,
-          beatB,
-          Array.isArray(valA) ? valA : [valA],
-          Array.isArray(valB) ? valB : [valB],
-          easingType
-        )
+        vectorEvent(beatA, beatB, Array.isArray(valA) ? valA : [valA], Array.isArray(valB) ? valB : [valB], easingType)
       );
     }
   }
@@ -576,16 +556,10 @@ export class EffectBuilder {
    * effect.animate('rotX', 0, Math.PI * 4, { start: 0, end: 16, easing: 'sineInOut' });
    * ```
    */
-  animate(
-    name: string,
-    from: number | number[],
-    to: number | number[],
-    opts: AnimateOptions = {}
-  ): this {
+  animate(name: string, from: number | number[], to: number | number[], opts: AnimateOptions = {}): this {
     const start = opts.start ?? this.startBeat;
     const end = opts.end ?? this.endBeat;
-    const easingType =
-      typeof opts.easing === "string" ? resolveEasingType(opts.easing) : (opts.easing ?? 2);
+    const easingType = typeof opts.easing === "string" ? resolveEasingType(opts.easing) : (opts.easing ?? 2);
     return this.set(name, animateValue(start, end, from, to, easingType));
   }
 
@@ -605,11 +579,7 @@ export class EffectBuilder {
    * ], 'cubicOut');
    * ```
    */
-  keyframes(
-    name: string,
-    kfs: [beat: number, value: number | number[]][],
-    easing: number | string = 2
-  ): this {
+  keyframes(name: string, kfs: [beat: number, value: number | number[]][], easing: number | string = 2): this {
     const easingType = typeof easing === "string" ? resolveEasingType(easing) : easing;
     return this.set(name, keyframesToAnimatedVariable(kfs, easingType));
   }
@@ -638,16 +608,9 @@ export class EffectBuilder {
     peak: number | number[] = 1,
     opts: { easingIn?: number | string; easingOut?: number | string } = {}
   ): this {
-    const easingIn =
-      typeof opts.easingIn === "string" ? resolveEasingType(opts.easingIn) : (opts.easingIn ?? 2);
-    const easingOut =
-      typeof opts.easingOut === "string"
-        ? resolveEasingType(opts.easingOut)
-        : (opts.easingOut ?? 2);
-    return this.set(
-      name,
-      pulseVariable(this.startBeat, peakBeat, this.endBeat, peak, easingIn, easingOut)
-    );
+    const easingIn = typeof opts.easingIn === "string" ? resolveEasingType(opts.easingIn) : (opts.easingIn ?? 2);
+    const easingOut = typeof opts.easingOut === "string" ? resolveEasingType(opts.easingOut) : (opts.easingOut ?? 2);
+    return this.set(name, pulseVariable(this.startBeat, peakBeat, this.endBeat, peak, easingIn, easingOut));
   }
 
   /**
@@ -940,12 +903,7 @@ export interface CreateVideoOptions {
  * });
  * ```
  */
-export function addVideo(
-  extra: PhiraExtra,
-  path: string,
-  startBeat: number,
-  options: CreateVideoOptions = {}
-): number {
+export function addVideo(extra: PhiraExtra, path: string, startBeat: number, options: CreateVideoOptions = {}): number {
   if (!extra.videos) extra.videos = [];
   const video: Video = {
     path,
@@ -1019,9 +977,7 @@ export function getEffectVarNames(effect: ShaderEffect): string[] {
  * @returns True if it's an AnimatedVariable (event array).
  */
 export function isAnimated(value: Variable): value is AnimatedVariable {
-  return (
-    Array.isArray(value) && value.length > 0 && typeof value[0] === "object" && value[0] !== null
-  );
+  return Array.isArray(value) && value.length > 0 && typeof value[0] === "object" && value[0] !== null;
 }
 
 // ─── Extra-level Operations ─────────────────────────────────────────────────
@@ -1291,9 +1247,7 @@ export function generateShaderTemplate(
  * @param source - GLSL shader source code.
  * @returns Array of parsed uniform info.
  */
-export function parseShaderUniforms(
-  source: string
-): { type: string; name: string; defaultValue: string }[] {
+export function parseShaderUniforms(source: string): { type: string; name: string; defaultValue: string }[] {
   const regex = /uniform\s+(\w+)\s+(\w+);\s+\/\/\s+%([^%]+)%/g;
   const results: { type: string; name: string; defaultValue: string }[] = [];
   let match: RegExpExecArray | null;
@@ -1340,10 +1294,7 @@ export function uniformsToVars(
 /**
  * Default parameter values for each built-in shader, as documented by prpr.
  */
-export const BUILTIN_SHADER_DEFAULTS: Record<
-  BuiltinShaderName,
-  Record<string, number | number[]>
-> = {
+export const BUILTIN_SHADER_DEFAULTS: Record<BuiltinShaderName, Record<string, number | number[]>> = {
   chromatic: { sampleCount: 3, power: 0.01 },
   circleBlur: { size: 10.0 },
   fisheye: { power: -0.1 },

@@ -1,7 +1,3 @@
 node_modules
-INPUT
-OUTPUT
-project
+docs
 *.json
-*.yml
-*.yaml

@@ -187,8 +187,7 @@ export function initBpmList(bpmList: Bpm[]): void {
   let lastTimeSec = 0;
   bpmList.forEach((bpm, i) => {
     bpm.startBeat = toBeats(bpm.startTime);
-    bpm.startTimeSec =
-      i === 0 ? lastTimeSec : lastTimeSec + ((bpm.startBeat - lastBeat) / lastBpm) * 60;
+    bpm.startTimeSec = i === 0 ? lastTimeSec : lastTimeSec + ((bpm.startBeat - lastBeat) / lastBpm) * 60;
     lastBpm = bpm.bpm;
     lastBeat = bpm.startBeat;
     lastTimeSec = bpm.startTimeSec;
@@ -246,22 +245,10 @@ export function calculateValue(
     }
     // Prefix-based text reveal
     if (start.startsWith(end)) {
-      return (
-        end +
-        start.substring(
-          end.length,
-          Math.floor((start.length - end.length) * (1 - progress)) + end.length
-        )
-      );
+      return end + start.substring(end.length, Math.floor((start.length - end.length) * (1 - progress)) + end.length);
     }
     if (end.startsWith(start)) {
-      return (
-        start +
-        end.substring(
-          start.length,
-          Math.floor((end.length - start.length) * progress) + start.length
-        )
-      );
+      return start + end.substring(start.length, Math.floor((end.length - start.length) * progress) + start.length);
     }
     return progress >= 1 ? end : start;
   }
@@ -297,19 +284,14 @@ export function getEventValueAtProgress(
   x: number
 ): number | number[] | string | undefined {
   const easingType = "easingType" in event ? event.easingType : 0;
-  const bezierPoints =
-    "bezier" in event && (event as Event).bezier === 1 ? (event as Event).bezierPoints : undefined;
+  const bezierPoints = "bezier" in event && (event as Event).bezier === 1 ? (event as Event).bezierPoints : undefined;
   const easingLeft = "easingLeft" in event ? (event as Event).easingLeft : 0;
   const easingRight = "easingRight" in event ? (event as Event).easingRight : 1;
 
   const progress = easing(easingType, x, easingLeft, easingRight, bezierPoints);
   if (progress === 0) return event.start;
   if (progress === 1) return event.end;
-  return calculateValue(
-    event.start as number | number[] | string,
-    event.end as number | number[] | string,
-    progress
-  );
+  return calculateValue(event.start as number | number[] | string, event.end as number | number[] | string, progress);
 }
 
 // ─── Speed Event Height Integral ─────────────────────────────────────────────
@@ -323,12 +305,7 @@ export function getEventValueAtProgress(
  * @param beat - Beat to integrate up to (defaults to event.endBeat).
  * @returns Height accumulated over the event.
  */
-export function getSpeedIntegral(
-  event: SpeedEvent,
-  bpmList: Bpm[],
-  integrateEasings: boolean,
-  beat?: number
-): number {
+export function getSpeedIntegral(event: SpeedEvent, bpmList: Bpm[], integrateEasings: boolean, beat?: number): number {
   if (beat === undefined || beat >= event.endBeat) beat = event.endBeat;
   const startSec = getTimeSec(bpmList, event.startBeat);
   const progressedSec = getTimeSec(bpmList, beat) - startSec;
@@ -349,8 +326,7 @@ export function getSpeedIntegral(
     const k = (event.end - event.start) / (df1 - df0);
     const b = event.start - k * df0;
     const p = sanitizeEasingParams(event.easingType, x, easingLeft, easingRight);
-    const integralVal =
-      k * calculateEasingValue(EASINGS[p.type - 1]!, p.x, p.easingLeft, p.easingRight) + b * p.x;
+    const integralVal = k * calculateEasingValue(EASINGS[p.type - 1]!, p.x, p.easingLeft, p.easingRight) + b * p.x;
     return (integralVal * lengthSec) / (event.endBeat - event.startBeat);
   } else {
     const integral = calculateEasingIntegral(event.easingType, x, easingLeft, easingRight);
@@ -387,8 +363,7 @@ export function computeHeight(
       lastHeight +=
         getSpeedIntegral(events[cur]!, bpmList, integrateEasings) +
         events[cur]!.end *
-          (getTimeSec(bpmList, events[cur + 1]!.startBeat) -
-            getTimeSec(bpmList, events[cur]!.endBeat));
+          (getTimeSec(bpmList, events[cur + 1]!.startBeat) - getTimeSec(bpmList, events[cur]!.endBeat));
       cur++;
     }
     let height = lastHeight;
@@ -580,15 +555,8 @@ export function evaluateControl(
     return current[valueKey as keyof Control] ?? (valueKey === "skew" ? 0 : 1);
   }
 
-  const progress = easing(
-    current["easing"] ?? 1,
-    (x - current["x"]!) / (next["x"]! - current["x"]!)
-  );
-  return lerp(
-    current[valueKey as keyof Control] ?? 0,
-    next[valueKey as keyof Control] ?? 0,
-    progress
-  );
+  const progress = easing(current["easing"] ?? 1, (x - current["x"]!) / (next["x"]! - current["x"]!));
+  return lerp(current[valueKey as keyof Control] ?? 0, next[valueKey as keyof Control] ?? 0, progress);
 }
 
 // ─── Event Creation Helpers ──────────────────────────────────────────────────
@@ -931,20 +899,11 @@ export function mirrorEventValues(events: (Event | SpeedEvent)[], center = 0): v
  * const alpha = keyframesToEvents([[0, 0], [1, 255], [3, 255], [4, 0]]);
  * ```
  */
-export function keyframesToEvents(
-  keyframes: [number, number][],
-  easingType: number | string = 1
-): Event[] {
+export function keyframesToEvents(keyframes: [number, number][], easingType: number | string = 1): Event[] {
   const events: Event[] = [];
   for (let i = 0; i < keyframes.length - 1; i++) {
     events.push(
-      createEvent(
-        keyframes[i]![1],
-        keyframes[i + 1]![1],
-        keyframes[i]![0],
-        keyframes[i + 1]![0],
-        easingType
-      )
+      createEvent(keyframes[i]![1], keyframes[i + 1]![1], keyframes[i]![0], keyframes[i + 1]![0], easingType)
     );
   }
   return events;
@@ -970,12 +929,7 @@ export function keyframesToEvents(
  * layer.moveXEvents = [...(layer.moveXEvents ?? []), ...copies];
  * ```
  */
-export function copyEvents(
-  events: Event[],
-  sourceStart: number,
-  sourceEnd: number,
-  targetStart: number
-): Event[] {
+export function copyEvents(events: Event[], sourceStart: number, sourceEnd: number, targetStart: number): Event[] {
   const offset = targetStart - sourceStart;
   return events
     .filter((e) => e.startBeat >= sourceStart && e.endBeat <= sourceEnd)

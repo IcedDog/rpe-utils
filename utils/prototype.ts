@@ -97,14 +97,8 @@ import {
 } from "./chart-utils";
 
 import { toBeats, fromBeats, initBpmList, getTimeSec } from "./events";
-import {
-  noteIterator,
-  lineIterator,
-  eventIterator,
-  NoteIterator,
-  LineIterator,
-  EventIterator,
-} from "./iterators";
+import { noteIterator, lineIterator, eventIterator, NoteIterator, LineIterator, EventIterator } from "./iterators";
+import { create } from "domain";
 
 // ─── ChartBuilder ─────────────────────────────────────────────────────────────
 
@@ -172,8 +166,8 @@ export class ChartBuilder {
    * Add a new line and return its `LineBuilder`.
    * The `ChartBuilder` is accessible via `lineBuilder.chart`.
    */
-  line(options: CreateLineOptions = {}): LineBuilder {
-    const index = addLine(this.data, options);
+  line(options: CreateLineOptions = {}, createDefaultEvents = true): LineBuilder {
+    const index = addLine(this.data, options, createDefaultEvents);
     return new LineBuilder(this.data, index);
   }
 
@@ -192,10 +186,11 @@ export class ChartBuilder {
    */
   lines(
     count: number,
-    options: CreateLineOptions | ((i: number) => CreateLineOptions) = {}
+    options: CreateLineOptions | ((i: number) => CreateLineOptions) = {},
+    createDefaultEvents = true
   ): LineBuilder[] {
     return Array.from({ length: count }, (_, i) =>
-      this.line(typeof options === "function" ? options(i) : options)
+      this.line(typeof options === "function" ? options(i) : options, createDefaultEvents)
     );
   }
 
@@ -365,8 +360,8 @@ export class ChartBuilder {
    * Add a new line and return its `LineBuilder`.
    * Alias for `.line()`.
    */
-  addLine(options: CreateLineOptions = {}): LineBuilder {
-    return this.line(options);
+  addLine(options: CreateLineOptions = {}, createDefaultEvents = true): LineBuilder {
+    return this.line(options, createDefaultEvents);
   }
 
   /**
@@ -511,10 +506,7 @@ export class LineBuilder {
    * @param sharedOptions - Options applied to all notes.
    * @returns `this` for chaining.
    */
-  addNotes(
-    beats: (number | [number, CreateNoteOptions])[],
-    sharedOptions: CreateNoteOptions = {}
-  ): this {
+  addNotes(beats: (number | [number, CreateNoteOptions])[], sharedOptions: CreateNoteOptions = {}): this {
     addNotes(this.chart, this.index, beats, sharedOptions);
     return this;
   }
@@ -608,14 +600,7 @@ export class LineBuilder {
   /**
    * Add a rotate event on layer 0.
    */
-  rotate(
-    startBeat: number,
-    endBeat: number,
-    from: number,
-    to: number,
-    easing = 1,
-    index = 0
-  ): this {
+  rotate(startBeat: number, endBeat: number, from: number, to: number, easing = 1, index = 0): this {
     addRotateEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing);
     return this;
   }
@@ -740,76 +725,31 @@ export class EventLayerBuilder {
 
   /** Add a moveX event on this layer. */
   moveX(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addMoveXEvent(
-      this.chart,
-      this.lineIndex,
-      this.layerIndex,
-      startBeat,
-      endBeat,
-      from,
-      to,
-      easing
-    );
+    addMoveXEvent(this.chart, this.lineIndex, this.layerIndex, startBeat, endBeat, from, to, easing);
     return this;
   }
 
   /** Add a moveY event on this layer. */
   moveY(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addMoveYEvent(
-      this.chart,
-      this.lineIndex,
-      this.layerIndex,
-      startBeat,
-      endBeat,
-      from,
-      to,
-      easing
-    );
+    addMoveYEvent(this.chart, this.lineIndex, this.layerIndex, startBeat, endBeat, from, to, easing);
     return this;
   }
 
   /** Add a rotate event on this layer. */
   rotate(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addRotateEvent(
-      this.chart,
-      this.lineIndex,
-      this.layerIndex,
-      startBeat,
-      endBeat,
-      from,
-      to,
-      easing
-    );
+    addRotateEvent(this.chart, this.lineIndex, this.layerIndex, startBeat, endBeat, from, to, easing);
     return this;
   }
 
   /** Add an alpha event on this layer. */
   alpha(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addAlphaEvent(
-      this.chart,
-      this.lineIndex,
-      this.layerIndex,
-      startBeat,
-      endBeat,
-      from,
-      to,
-      easing
-    );
+    addAlphaEvent(this.chart, this.lineIndex, this.layerIndex, startBeat, endBeat, from, to, easing);
     return this;
   }
 
   /** Add a speed event on this layer. */
   speed(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addSpeedEvent(
-      this.chart,
-      this.lineIndex,
-      this.layerIndex,
-      startBeat,
-      endBeat,
-      from,
-      to,
-      easing
-    );
+    addSpeedEvent(this.chart, this.lineIndex, this.layerIndex, startBeat, endBeat, from, to, easing);
     return this;
   }
 

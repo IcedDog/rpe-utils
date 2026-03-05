@@ -183,12 +183,7 @@ export interface LineState {
  * // state.color                 — [r, g, b] or undefined
  * ```
  */
-export function getLineState(
-  chart: RpeJson,
-  lineIndex: number,
-  beat: number,
-  chartFlipping = 0
-): LineState {
+export function getLineState(chart: RpeJson, lineIndex: number, beat: number, chartFlipping = 0): LineState {
   const line = chart.judgeLineList[lineIndex]!;
   const bpmList = chart.BPMList;
   const bpmfactor = line.bpmfactor || 1;
@@ -336,12 +331,7 @@ export function getNotePosition(
   // Compute target height for the note
   const adjustedBeat = beat / bpmfactor;
   const integrateEasings = line.integrateSpeedEasings ?? chart.META.RPEVersion >= 170;
-  const targetHeight = computeHeight(
-    line.eventLayers,
-    toBeats(note.startTime),
-    bpmList,
-    integrateEasings
-  );
+  const targetHeight = computeHeight(line.eventLayers, toBeats(note.startTime), bpmList, integrateEasings);
 
   // yOffset is pre-multiplied by speed in the game: note.yOffset *= note.speed
   const yOffset = note.yOffset * note.speed;
@@ -362,8 +352,7 @@ export function getNotePosition(
   // Compute local X using control values
   const posControlVal = evaluateControl(line.posControl, chartDist, "pos");
   const incline = lineState.incline ?? 0;
-  const inclineTerm =
-    Math.tan(((xModifier * note.positionX) / 675) * -incline * (Math.PI / 180)) * chartDist;
+  const inclineTerm = Math.tan(((xModifier * note.positionX) / 675) * -incline * (Math.PI / 180)) * chartDist;
 
   const localX = p(xModifier * note.positionX * posControlVal + inclineTerm);
 

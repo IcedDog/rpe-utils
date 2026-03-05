@@ -119,14 +119,7 @@ import type {
   Beat,
 } from "./types";
 
-import {
-  toBeats,
-  fromBeats,
-  initBpmList,
-  getTimeSec,
-  processEvents,
-  processControlNodes,
-} from "./events";
+import { toBeats, fromBeats, initBpmList, getTimeSec, processEvents, processControlNodes } from "./events";
 import { deepClone } from "./math";
 
 // ─── Chart Creation ──────────────────────────────────────────────────────────
@@ -156,11 +149,7 @@ import { deepClone } from "./math";
  * });
  * ```
  */
-export function createEmptyChart(
-  bpm = 120,
-  name = "Untitled",
-  options: Partial<RpeMeta> = {}
-): RpeJson {
+export function createEmptyChart(bpm = 120, name = "Untitled", options: Partial<RpeMeta> = {}): RpeJson {
   const meta: RpeMeta = {
     RPEVersion: 150,
     background: "",
@@ -237,10 +226,7 @@ export interface CreateLineOptions {
  * addLine(chart, opts);
  * ```
  */
-export function getLineOptions(
-  line: JudgeLine,
-  options: Partial<CreateLineOptions> = {}
-): CreateLineOptions {
+export function getLineOptions(line: JudgeLine, options: Partial<CreateLineOptions> = {}): CreateLineOptions {
   return {
     name: line.Name,
     texture: line.Texture,
@@ -276,11 +262,7 @@ export function getLineOptions(
  * addMoveXEvent(chart, li, 0, 0, 4, -675, 675);
  * ```
  */
-export function addLine(
-  chart: RpeJson,
-  options: CreateLineOptions = {},
-  createDefualtEvents = true
-): number {
+export function addLine(chart: RpeJson, options: CreateLineOptions = {}, createDefualtEvents = true): number {
   const index = chart.judgeLineList.length;
   const line: JudgeLine = {
     Name: options.name ?? `Untitled`,
@@ -434,10 +416,7 @@ export interface CreateNoteOptions {
  * @param options - Additional overrides to apply.
  * @returns A complete `CreateNoteOptions` object.
  */
-export function getNoteOptions(
-  note: Note,
-  options: Partial<CreateNoteOptions> = {}
-): CreateNoteOptions {
+export function getNoteOptions(note: Note, options: Partial<CreateNoteOptions> = {}): CreateNoteOptions {
   return {
     type: note.type as 1 | 2 | 3 | 4,
     positionX: note.positionX,
@@ -477,12 +456,7 @@ export function getNoteOptions(
  * addNote(chart, 0, 8, { positionX: -200, above: 2 }); // below the line, offset left
  * ```
  */
-export function addNote(
-  chart: RpeJson,
-  lineIndex: number,
-  beat: number,
-  options: CreateNoteOptions = {}
-): number {
+export function addNote(chart: RpeJson, lineIndex: number, beat: number, options: CreateNoteOptions = {}): number {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
   if (!line.notes) line.notes = [];
@@ -727,11 +701,7 @@ export function removeEvents(
  * @param layerIndex - Event layer index to remove.
  * @returns The removed EventLayer, or `undefined`.
  */
-export function removeEventLayer(
-  chart: RpeJson,
-  lineIndex: number,
-  layerIndex: number
-): EventLayer | null | undefined {
+export function removeEventLayer(chart: RpeJson, lineIndex: number, layerIndex: number): EventLayer | null | undefined {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
   if (layerIndex < 0 || layerIndex >= line.eventLayers.length) return undefined;
@@ -813,10 +783,7 @@ export function addBpmChange(chart: RpeJson, beat: number, bpm: number): RpeJson
  * removeBpmChange(chart, 1);
  * ```
  */
-export function removeBpmChange(
-  chart: RpeJson,
-  index: number
-): { bpm: number; startBeat: number } | undefined {
+export function removeBpmChange(chart: RpeJson, index: number): { bpm: number; startBeat: number } | undefined {
   if (index <= 0 || index >= chart.BPMList.length) return undefined;
   const [removed] = chart.BPMList.splice(index, 1);
   initBpmList(chart.BPMList);
@@ -1849,12 +1816,7 @@ export function offsetChart(chart: RpeJson, beatOffset: number): RpeJson {
     // Offset events in all layers
     for (const layer of line.eventLayers) {
       if (!layer) continue;
-      const eventArrays = [
-        layer.alphaEvents,
-        layer.moveXEvents,
-        layer.moveYEvents,
-        layer.rotateEvents,
-      ];
+      const eventArrays = [layer.alphaEvents, layer.moveXEvents, layer.moveYEvents, layer.rotateEvents];
       for (const arr of eventArrays) {
         if (!arr) continue;
         for (const ev of arr) {
@@ -1875,11 +1837,10 @@ export function offsetChart(chart: RpeJson, beatOffset: number): RpeJson {
     }
     // Offset extended events
     if (line.extended) {
-      const extArrays = [
-        line.extended.inclineEvents,
-        line.extended.scaleXEvents,
-        line.extended.scaleYEvents,
-      ] as (Event[] | undefined)[];
+      const extArrays = [line.extended.inclineEvents, line.extended.scaleXEvents, line.extended.scaleYEvents] as (
+        | Event[]
+        | undefined
+      )[];
       for (const arr of extArrays) {
         if (!arr) continue;
         for (const ev of arr) {
@@ -2004,13 +1965,7 @@ function getOrCreateLayer(chart: RpeJson, lineIndex: number, layerIndex: number)
 }
 
 /** Create a standard Event with given parameters. */
-function makeEvent(
-  startBeat: number,
-  endBeat: number,
-  startVal: number,
-  endVal: number,
-  easingType: number
-): Event {
+function makeEvent(startBeat: number, endBeat: number, startVal: number, endVal: number, easingType: number): Event {
   return {
     bezier: 0,
     bezierPoints: [0, 0, 1, 1],

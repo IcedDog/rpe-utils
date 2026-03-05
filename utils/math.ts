@@ -246,8 +246,7 @@ export function mat3Mul(a: Mat3, b: Mat3): Mat3 {
   const r = new Float64Array(9);
   for (let row = 0; row < 3; row++) {
     for (let col = 0; col < 3; col++) {
-      r[row * 3 + col] =
-        a[row * 3]! * b[col]! + a[row * 3 + 1]! * b[3 + col]! + a[row * 3 + 2]! * b[6 + col]!;
+      r[row * 3 + col] = a[row * 3]! * b[col]! + a[row * 3 + 1]! * b[3 + col]! + a[row * 3 + 2]! * b[6 + col]!;
     }
   }
   return r;
@@ -320,13 +319,7 @@ export function inverseLerp(a: number, b: number, value: number): number {
  * remap(128, 0, 255, 0, 1);     // ≈ 0.502
  * ```
  */
-export function remap(
-  value: number,
-  inMin: number,
-  inMax: number,
-  outMin: number,
-  outMax: number
-): number {
+export function remap(value: number, inMin: number, inMax: number, outMin: number, outMax: number): number {
   return lerp(outMin, outMax, inverseLerp(inMin, inMax, value));
 }
 
