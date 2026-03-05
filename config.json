@@ -1,0 +1,16 @@
+{
+  "individualFiles": [
+    "CS.json",
+    "extra.json",
+    "shaders/camera.glsl",
+    "shaders/camera_repeat.glsl",
+    "shaders/camera_extend.glsl",
+    "shaders/camera_ssaa.glsl",
+    "shaders/camera_ssaa_repeat.glsl",
+    "shaders/camera_ssaa_extend.glsl",
+    "shaders/turbulence.glsl",
+    "shaders/glow.glsl",
+    "shaders/bnc.glsl",
+    "shaders/rect.glsl"
+  ]
+}

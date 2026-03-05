@@ -1,0 +1,1331 @@
+<!doctype html>
+<html class="default" lang="en" data-base="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>math | RPE Chart Utils</title>
+    <meta name="description" content="Documentation for RPE Chart Utils" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/highlight.css" />
+    <script defer src="../assets/main.js"></script>
+    <script async src="../assets/icons.js" id="tsd-icons-script"></script>
+    <script async src="../assets/search.js" id="tsd-search-script"></script>
+    <script async src="../assets/navigation.js" id="tsd-nav-script"></script>
+    <script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script>
+  </head>
+  <body>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";
+      document.body.style.display = "none";
+      setTimeout(
+        () => (window.app ? app.showPage() : document.body.style.removeProperty("display")),
+        500
+      );
+    </script>
+    <header class="tsd-page-toolbar">
+      <div class="tsd-toolbar-contents container">
+        <a href="../index.html" class="title">RPE Chart Utils</a>
+        <div id="tsd-toolbar-links"></div>
+        <button id="tsd-search-trigger" class="tsd-widget" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <use href="../assets/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <dialog id="tsd-search" aria-label="Search">
+          <input
+            role="combobox"
+            id="tsd-search-input"
+            aria-controls="tsd-search-results"
+            aria-autocomplete="list"
+            aria-expanded="true"
+            autocapitalize="off"
+            autocomplete="off"
+            placeholder="Search the docs"
+            maxlength="100"
+          />
+          <ul role="listbox" id="tsd-search-results"></ul>
+          <div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+            <div>Preparing search index...</div>
+          </div>
+        </dialog>
+        <a
+          href="#"
+          class="tsd-widget menu"
+          id="tsd-toolbar-menu-trigger"
+          data-toggle="menu"
+          aria-label="Menu"
+          ><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <use href="../assets/icons.svg#icon-menu"></use></svg
+        ></a>
+      </div>
+    </header>
+    <div class="container container-main">
+      <div class="col-content">
+        <div class="tsd-page-title">
+          <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+            <li><a href="" aria-current="page">math</a></li>
+          </ul>
+          <h1>Module math</h1>
+        </div>
+        <section class="tsd-panel tsd-comment">
+          <div class="tsd-comment tsd-typography">
+            <p>
+              Math utilities for chart manipulation: vectors, matrices, interpolation, random/noise,
+              rotation, and array helpers.
+            </p>
+            <h2 id="quick-reference" class="tsd-anchor-link">
+              Quick reference<a
+                href="#quick-reference"
+                aria-label="Permalink"
+                class="tsd-anchor-icon"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="../assets/icons.svg#icon-anchor"></use></svg
+              ></a>
+            </h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Key exports</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Vec2</td>
+                  <td>
+                    <code>vec2</code>, <code>vec2Add</code>, <code>vec2Sub</code>,
+                    <code>vec2Scale</code>, <code>vec2Lerp</code>, <code>vec2Rotate</code>,
+                    <code>vec2Normalize</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Mat3</td>
+                  <td>
+                    <code>mat3Identity</code>, <code>mat3TRS</code>, <code>mat3Mul</code>,
+                    <code>mat3TransformVec2</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Scalar</td>
+                  <td>
+                    <code>clamp</code>, <code>lerp</code>, <code>inverseLerp</code>,
+                    <code>remap</code>, <code>smoothstep</code>, <code>degToRad</code>,
+                    <code>radToDeg</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Angles</td>
+                  <td>
+                    <code>wrapAngle</code>, <code>angleDifference</code>, <code>lerpAngle</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Random</td>
+                  <td>
+                    <code>randomRange</code>, <code>randomInt</code>, <code>randomPick</code>,
+                    <code>shuffle</code>, <code>createSeededRandom</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Noise</td>
+                  <td><code>valueNoise1D</code>, <code>valueNoise2D</code>, <code>fbm2D</code></td>
+                </tr>
+                <tr>
+                  <td>Arrays</td>
+                  <td>
+                    <code>linspace</code>, <code>arange</code>, <code>sum</code>,
+                    <code>average</code>, <code>minMax</code>, <code>groupBy</code>,
+                    <code>binarySearchRight</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Misc</td>
+                  <td>
+                    <code>deepClone</code>, <code>approxEqual</code>, <code>fract</code>,
+                    <code>mod</code>, <code>sign</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tsd-comment tsd-typography">
+            <div class="tsd-tag-example">
+              <h4 class="tsd-anchor-link" id="example">
+                Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h4>
+              <pre><code class="ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">vec2</span><span class="hl-1">, </span><span class="hl-4">vec2Add</span><span class="hl-1">, </span><span class="hl-4">vec2Normalize</span><span class="hl-1">, </span><span class="hl-4">lerp</span><span class="hl-1">, </span><span class="hl-4">clamp</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;./math&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Normalize a direction vector and advance along it</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">dir</span><span class="hl-1"> = </span><span class="hl-0">vec2Normalize</span><span class="hl-1">(</span><span class="hl-0">vec2</span><span class="hl-1">(</span><span class="hl-8">3</span><span class="hl-1">, </span><span class="hl-8">4</span><span class="hl-1">));   </span><span class="hl-5">// { x: 0.6, y: 0.8 }</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">pos</span><span class="hl-1"> = </span><span class="hl-0">vec2Add</span><span class="hl-1">(</span><span class="hl-0">vec2</span><span class="hl-1">(</span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">0</span><span class="hl-1">), </span><span class="hl-4">dir</span><span class="hl-1">);    </span><span class="hl-5">// { x: 0.6, y: 0.8 }</span><br/><br/><span class="hl-5">// Smooth fade from 0 → 255 alpha</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">alpha</span><span class="hl-1"> = </span><span class="hl-4">Math</span><span class="hl-1">.</span><span class="hl-0">round</span><span class="hl-1">(</span><span class="hl-0">lerp</span><span class="hl-1">(</span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">255</span><span class="hl-1">, </span><span class="hl-0">clamp</span><span class="hl-1">(</span><span class="hl-4">t</span><span class="hl-1">, </span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">1</span><span class="hl-1">)));</span>
+</code><button type="button">Copy</button></pre>
+            </div>
+          </div>
+        </section>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Interfaces">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Interfaces</h2>
+          </summary>
+          <dl class="tsd-member-summaries">
+            <dt class="tsd-member-summary" id="vec2">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Interface">
+                  <use href="../assets/icons.svg#icon-256"></use></svg
+                ><a href="../interfaces/math.Vec2.html">Vec2</a
+                ><a href="#vec2" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+          </dl>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Type Aliases">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Type Aliases</h2>
+          </summary>
+          <dl class="tsd-member-summaries">
+            <dt class="tsd-member-summary" id="mat3">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Type Alias">
+                  <use href="../assets/icons.svg#icon-2097152"></use></svg
+                ><a href="../types/math.Mat3.html">Mat3</a
+                ><a href="#mat3" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+          </dl>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Variables">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Variables</h2>
+          </summary>
+          <dl class="tsd-member-summaries">
+            <dt class="tsd-member-summary" id="vec2_zero">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                  <use href="../assets/icons.svg#icon-32"></use></svg
+                ><a href="../variables/math.VEC2_ZERO.html">VEC2_ZERO</a
+                ><a href="#vec2_zero" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2_one">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                  <use href="../assets/icons.svg#icon-32"></use></svg
+                ><a href="../variables/math.VEC2_ONE.html">VEC2_ONE</a
+                ><a href="#vec2_one" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2_right">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                  <use href="../assets/icons.svg#icon-32"></use></svg
+                ><a href="../variables/math.VEC2_RIGHT.html">VEC2_RIGHT</a
+                ><a href="#vec2_right" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2_up">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                  <use href="../assets/icons.svg#icon-32"></use></svg
+                ><a href="../variables/math.VEC2_UP.html">VEC2_UP</a
+                ><a href="#vec2_up" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+          </dl>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Functions">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Functions</h2>
+          </summary>
+          <dl class="tsd-member-summaries">
+            <dt class="tsd-member-summary" id="vec2-1">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2.html">vec2</a
+                ><a href="#vec2-1" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2add">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Add.html">vec2Add</a
+                ><a href="#vec2add" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2sub">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Sub.html">vec2Sub</a
+                ><a href="#vec2sub" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2scale">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Scale.html">vec2Scale</a
+                ><a href="#vec2scale" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2negate">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Negate.html">vec2Negate</a
+                ><a href="#vec2negate" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2dot">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Dot.html">vec2Dot</a
+                ><a href="#vec2dot" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2cross">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Cross.html">vec2Cross</a
+                ><a href="#vec2cross" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2length">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Length.html">vec2Length</a
+                ><a href="#vec2length" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2lengthsq">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2LengthSq.html">vec2LengthSq</a
+                ><a href="#vec2lengthsq" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2distance">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Distance.html">vec2Distance</a
+                ><a href="#vec2distance" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2normalize">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Normalize.html">vec2Normalize</a
+                ><a href="#vec2normalize" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2lerp">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Lerp.html">vec2Lerp</a
+                ><a href="#vec2lerp" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2rotate">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Rotate.html">vec2Rotate</a
+                ><a href="#vec2rotate" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2angle">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Angle.html">vec2Angle</a
+                ><a href="#vec2angle" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2fromangle">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2FromAngle.html">vec2FromAngle</a
+                ><a href="#vec2fromangle" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2min">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Min.html">vec2Min</a
+                ><a href="#vec2min" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2max">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Max.html">vec2Max</a
+                ><a href="#vec2max" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2reflect">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Reflect.html">vec2Reflect</a
+                ><a href="#vec2reflect" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="vec2project">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.vec2Project.html">vec2Project</a
+                ><a href="#vec2project" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3identity">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3Identity.html">mat3Identity</a
+                ><a href="#mat3identity" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3translate">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3Translate.html">mat3Translate</a
+                ><a href="#mat3translate" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3rotate">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3Rotate.html">mat3Rotate</a
+                ><a href="#mat3rotate" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3scale">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3Scale.html">mat3Scale</a
+                ><a href="#mat3scale" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3mul">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3Mul.html">mat3Mul</a
+                ><a href="#mat3mul" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3transformvec2">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3TransformVec2.html">mat3TransformVec2</a
+                ><a href="#mat3transformvec2" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mat3trs">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mat3TRS.html">mat3TRS</a
+                ><a href="#mat3trs" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="clamp">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.clamp.html">clamp</a
+                ><a href="#clamp" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="lerp">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.lerp.html">lerp</a
+                ><a href="#lerp" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="inverselerp">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.inverseLerp.html">inverseLerp</a
+                ><a href="#inverselerp" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="remap">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.remap.html">remap</a
+                ><a href="#remap" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="smoothstep">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.smoothstep.html">smoothstep</a
+                ><a href="#smoothstep" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="smootherstep">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.smootherstep.html">smootherstep</a
+                ><a href="#smootherstep" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="degtorad">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.degToRad.html">degToRad</a
+                ><a href="#degtorad" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="radtodeg">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.radToDeg.html">radToDeg</a
+                ><a href="#radtodeg" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="wrapangle">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.wrapAngle.html">wrapAngle</a
+                ><a href="#wrapangle" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="angledifference">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.angleDifference.html">angleDifference</a
+                ><a href="#angledifference" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="lerpangle">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.lerpAngle.html">lerpAngle</a
+                ><a href="#lerpangle" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="fract">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.fract.html">fract</a
+                ><a href="#fract" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="mod">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.mod.html">mod</a
+                ><a href="#mod" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="sign">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.sign.html">sign</a
+                ><a href="#sign" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="approxequal">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.approxEqual.html">approxEqual</a
+                ><a href="#approxequal" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="randomrange">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.randomRange.html">randomRange</a
+                ><a href="#randomrange" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="randomint">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.randomInt.html">randomInt</a
+                ><a href="#randomint" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="randompick">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.randomPick.html">randomPick</a
+                ><a href="#randompick" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="shuffle">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.shuffle.html">shuffle</a
+                ><a href="#shuffle" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="createseededrandom">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.createSeededRandom.html">createSeededRandom</a
+                ><a href="#createseededrandom" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="valuenoise1d">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.valueNoise1D.html">valueNoise1D</a
+                ><a href="#valuenoise1d" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="valuenoise2d">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.valueNoise2D.html">valueNoise2D</a
+                ><a href="#valuenoise2d" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="fbm2d">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.fbm2D.html">fbm2D</a
+                ><a href="#fbm2d" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="linspace">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.linspace.html">linspace</a
+                ><a href="#linspace" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="arange">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.arange.html">arange</a
+                ><a href="#arange" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="sum">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.sum.html">sum</a
+                ><a href="#sum" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="average">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.average.html">average</a
+                ><a href="#average" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="minmax">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.minMax.html">minMax</a
+                ><a href="#minmax" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="binarysearchright">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.binarySearchRight.html">binarySearchRight</a
+                ><a href="#binarysearchright" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="groupby">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.groupBy.html">groupBy</a
+                ><a href="#groupby" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+            <dt class="tsd-member-summary" id="deepclone">
+              <span class="tsd-member-summary-name"
+                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                  <use href="../assets/icons.svg#icon-64"></use></svg
+                ><a href="../functions/math.deepClone.html">deepClone</a
+                ><a href="#deepclone" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
+              ></span>
+            </dt>
+            <dd class="tsd-member-summary"></dd>
+          </dl>
+        </details>
+      </div>
+      <div class="col-sidebar">
+        <div class="page-menu">
+          <div class="tsd-navigation settings">
+            <details class="tsd-accordion">
+              <summary class="tsd-accordion-summary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <use href="../assets/icons.svg#icon-chevronDown"></use>
+                </svg>
+                <h3>Settings</h3>
+              </summary>
+              <div class="tsd-accordion-details">
+                <div class="tsd-filter-visibility">
+                  <span class="settings-label">Member Visibility</span>
+                  <ul id="tsd-filter-options">
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input type="checkbox" id="tsd-filter-protected" name="protected" /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Protected</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-inherited"
+                          name="inherited"
+                          checked
+                        /><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Inherited</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input type="checkbox" id="tsd-filter-external" name="external" /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>External</span></label
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="tsd-theme-toggle">
+                  <label class="settings-label" for="tsd-theme">Theme</label
+                  ><select id="tsd-theme">
+                    <option value="os">OS</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </div>
+              </div>
+            </details>
+          </div>
+          <details open class="tsd-accordion tsd-page-navigation">
+            <summary class="tsd-accordion-summary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <use href="../assets/icons.svg#icon-chevronDown"></use>
+              </svg>
+              <h3>On This Page</h3>
+            </summary>
+            <div class="tsd-accordion-details">
+              <a href="#quick-reference"><span>Quick reference</span></a>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Interfaces">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Interfaces
+                </summary>
+                <div>
+                  <a href="#vec2"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Interface">
+                      <use href="../assets/icons.svg#icon-256"></use></svg
+                    ><span>Vec2</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Type Aliases">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Type Aliases
+                </summary>
+                <div>
+                  <a href="#mat3"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Type Alias">
+                      <use href="../assets/icons.svg#icon-2097152"></use></svg
+                    ><span>Mat3</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Variables">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Variables
+                </summary>
+                <div>
+                  <a href="#vec2_zero"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                      <use href="../assets/icons.svg#icon-32"></use></svg
+                    ><span>VEC2_<wbr />ZERO</span></a
+                  ><a href="#vec2_one"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                      <use href="../assets/icons.svg#icon-32"></use></svg
+                    ><span>VEC2_<wbr />ONE</span></a
+                  ><a href="#vec2_right"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                      <use href="../assets/icons.svg#icon-32"></use></svg
+                    ><span>VEC2_<wbr />RIGHT</span></a
+                  ><a href="#vec2_up"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
+                      <use href="../assets/icons.svg#icon-32"></use></svg
+                    ><span>VEC2_<wbr />UP</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Functions">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Functions
+                </summary>
+                <div>
+                  <a href="#vec2-1"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2</span></a
+                  ><a href="#vec2add"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Add</span></a
+                  ><a href="#vec2sub"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Sub</span></a
+                  ><a href="#vec2scale"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Scale</span></a
+                  ><a href="#vec2negate"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Negate</span></a
+                  ><a href="#vec2dot"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Dot</span></a
+                  ><a href="#vec2cross"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Cross</span></a
+                  ><a href="#vec2length"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Length</span></a
+                  ><a href="#vec2lengthsq"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Length<wbr />Sq</span></a
+                  ><a href="#vec2distance"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Distance</span></a
+                  ><a href="#vec2normalize"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Normalize</span></a
+                  ><a href="#vec2lerp"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Lerp</span></a
+                  ><a href="#vec2rotate"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Rotate</span></a
+                  ><a href="#vec2angle"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Angle</span></a
+                  ><a href="#vec2fromangle"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />From<wbr />Angle</span></a
+                  ><a href="#vec2min"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Min</span></a
+                  ><a href="#vec2max"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Max</span></a
+                  ><a href="#vec2reflect"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Reflect</span></a
+                  ><a href="#vec2project"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>vec2<wbr />Project</span></a
+                  ><a href="#mat3identity"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />Identity</span></a
+                  ><a href="#mat3translate"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />Translate</span></a
+                  ><a href="#mat3rotate"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />Rotate</span></a
+                  ><a href="#mat3scale"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />Scale</span></a
+                  ><a href="#mat3mul"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />Mul</span></a
+                  ><a href="#mat3transformvec2"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />Transform<wbr />Vec2</span></a
+                  ><a href="#mat3trs"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mat3<wbr />TRS</span></a
+                  ><a href="#clamp"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>clamp</span></a
+                  ><a href="#lerp"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>lerp</span></a
+                  ><a href="#inverselerp"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>inverse<wbr />Lerp</span></a
+                  ><a href="#remap"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>remap</span></a
+                  ><a href="#smoothstep"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>smoothstep</span></a
+                  ><a href="#smootherstep"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>smootherstep</span></a
+                  ><a href="#degtorad"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>deg<wbr />To<wbr />Rad</span></a
+                  ><a href="#radtodeg"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>rad<wbr />To<wbr />Deg</span></a
+                  ><a href="#wrapangle"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>wrap<wbr />Angle</span></a
+                  ><a href="#angledifference"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>angle<wbr />Difference</span></a
+                  ><a href="#lerpangle"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>lerp<wbr />Angle</span></a
+                  ><a href="#fract"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>fract</span></a
+                  ><a href="#mod"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>mod</span></a
+                  ><a href="#sign"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>sign</span></a
+                  ><a href="#approxequal"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>approx<wbr />Equal</span></a
+                  ><a href="#randomrange"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>random<wbr />Range</span></a
+                  ><a href="#randomint"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>random<wbr />Int</span></a
+                  ><a href="#randompick"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>random<wbr />Pick</span></a
+                  ><a href="#shuffle"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>shuffle</span></a
+                  ><a href="#createseededrandom"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>create<wbr />Seeded<wbr />Random</span></a
+                  ><a href="#valuenoise1d"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>value<wbr />Noise1<wbr />D</span></a
+                  ><a href="#valuenoise2d"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>value<wbr />Noise2<wbr />D</span></a
+                  ><a href="#fbm2d"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>fbm2<wbr />D</span></a
+                  ><a href="#linspace"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>linspace</span></a
+                  ><a href="#arange"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>arange</span></a
+                  ><a href="#sum"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>sum</span></a
+                  ><a href="#average"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>average</span></a
+                  ><a href="#minmax"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>min<wbr />Max</span></a
+                  ><a href="#binarysearchright"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>binary<wbr />Search<wbr />Right</span></a
+                  ><a href="#groupby"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>group<wbr />By</span></a
+                  ><a href="#deepclone"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
+                      <use href="../assets/icons.svg#icon-64"></use></svg
+                    ><span>deep<wbr />Clone</span></a
+                  >
+                </div>
+              </details>
+            </div>
+          </details>
+        </div>
+        <div class="site-menu">
+          <nav class="tsd-navigation">
+            <a href="../modules.html">RPE Chart Utils</a>
+            <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+              <li>Loading...</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p class="tsd-generator">
+        Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a>
+      </p>
+    </footer>
+    <div class="overlay"></div>
+  </body>
+</html>

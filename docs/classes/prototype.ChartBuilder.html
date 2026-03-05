@@ -1,0 +1,2423 @@
+<!doctype html>
+<html class="default" lang="en" data-base="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>ChartBuilder | RPE Chart Utils</title>
+    <meta name="description" content="Documentation for RPE Chart Utils" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/highlight.css" />
+    <script defer src="../assets/main.js"></script>
+    <script async src="../assets/icons.js" id="tsd-icons-script"></script>
+    <script async src="../assets/search.js" id="tsd-search-script"></script>
+    <script async src="../assets/navigation.js" id="tsd-nav-script"></script>
+    <script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script>
+  </head>
+  <body>
+    <script>
+      document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";
+      document.body.style.display = "none";
+      setTimeout(
+        () => (window.app ? app.showPage() : document.body.style.removeProperty("display")),
+        500
+      );
+    </script>
+    <header class="tsd-page-toolbar">
+      <div class="tsd-toolbar-contents container">
+        <a href="../index.html" class="title">RPE Chart Utils</a>
+        <div id="tsd-toolbar-links"></div>
+        <button id="tsd-search-trigger" class="tsd-widget" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <use href="../assets/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <dialog id="tsd-search" aria-label="Search">
+          <input
+            role="combobox"
+            id="tsd-search-input"
+            aria-controls="tsd-search-results"
+            aria-autocomplete="list"
+            aria-expanded="true"
+            autocapitalize="off"
+            autocomplete="off"
+            placeholder="Search the docs"
+            maxlength="100"
+          />
+          <ul role="listbox" id="tsd-search-results"></ul>
+          <div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+            <div>Preparing search index...</div>
+          </div>
+        </dialog>
+        <a
+          href="#"
+          class="tsd-widget menu"
+          id="tsd-toolbar-menu-trigger"
+          data-toggle="menu"
+          aria-label="Menu"
+          ><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <use href="../assets/icons.svg#icon-menu"></use></svg
+        ></a>
+      </div>
+    </header>
+    <div class="container container-main">
+      <div class="col-content">
+        <div class="tsd-page-title">
+          <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+            <li><a href="../modules/prototype.html">prototype</a></li>
+            <li><a href="" aria-current="page">ChartBuilder</a></li>
+          </ul>
+          <h1>Class ChartBuilder</h1>
+        </div>
+        <section class="tsd-panel tsd-comment">
+          <div class="tsd-comment tsd-typography">
+            <p>Fluent wrapper around an <code>RpeJson</code> object.</p>
+            <p>
+              All mutating methods return <code>this</code> for chaining. Use <code>.data</code> to
+              access the underlying raw chart at any time.
+            </p>
+            <h3 id="factory-methods" class="tsd-anchor-link">
+              Factory methods<a
+                href="#factory-methods"
+                aria-label="Permalink"
+                class="tsd-anchor-icon"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="../assets/icons.svg#icon-anchor"></use></svg
+              ></a>
+            </h3>
+            <ul>
+              <li><code>ChartBuilder.empty(bpm?, name?)</code> — create a new chart</li>
+              <li><code>ChartBuilder.from(chart)</code> — wrap an existing <code>RpeJson</code></li>
+            </ul>
+            <h3 id="methods-summary" class="tsd-anchor-link">
+              Methods summary<a
+                href="#methods-summary"
+                aria-label="Permalink"
+                class="tsd-anchor-icon"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="../assets/icons.svg#icon-anchor"></use></svg
+              ></a>
+            </h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Methods</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lines</td>
+                  <td>
+                    <code>.line()</code>, <code>.lines()</code>, <code>.getLine()</code>,
+                    <code>.removeLine()</code>, <code>.duplicateLine()</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>BPM</td>
+                  <td><code>.bpm()</code>, <code>.setBpm()</code>, <code>.removeBpm()</code></td>
+                </tr>
+                <tr>
+                  <td>Transforms</td>
+                  <td><code>.offset()</code>, <code>.mirror()</code>, <code>.merge()</code></td>
+                </tr>
+                <tr>
+                  <td>Metadata</td>
+                  <td>
+                    <code>.setName()</code>, <code>.setCharter()</code>,
+                    <code>.setComposer()</code>, <code>.setLevel()</code>,
+                    <code>.setOffset()</code>, <code>.setBackground()</code>,
+                    <code>.setSong()</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Iterators</td>
+                  <td>
+                    <code>.notes()</code>, <code>.lineIterator()</code>, <code>.events()</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Stats</td>
+                  <td>
+                    <code>.stats()</code>, <code>.validate()</code>, <code>.serialize()</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tsd-comment tsd-typography">
+            <div class="tsd-tag-example">
+              <h4 class="tsd-anchor-link" id="example">
+                Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h4>
+              <pre><code class="ts"><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">chart</span><span class="hl-1"> = </span><span class="hl-4">ChartBuilder</span><span class="hl-1">.</span><span class="hl-0">empty</span><span class="hl-1">(</span><span class="hl-8">120</span><span class="hl-1">, </span><span class="hl-2">&#39;My Chart&#39;</span><span class="hl-1">)</span><br/><span class="hl-1">  .</span><span class="hl-0">setCharter</span><span class="hl-1">(</span><span class="hl-2">&#39;Me&#39;</span><span class="hl-1">)</span><br/><span class="hl-1">  .</span><span class="hl-0">bpm</span><span class="hl-1">(</span><span class="hl-8">16</span><span class="hl-1">, </span><span class="hl-8">140</span><span class="hl-1">)      </span><span class="hl-5">// tempo change at beat 16</span><br/><span class="hl-1">  .</span><span class="hl-0">offset</span><span class="hl-1">(</span><span class="hl-8">8</span><span class="hl-1">);        </span><span class="hl-5">// shift everything 8 beats forward</span><br/><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">line</span><span class="hl-1"> = </span><span class="hl-4">chart</span><span class="hl-1">.</span><span class="hl-0">line</span><span class="hl-1">({ </span><span class="hl-4">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;Main&#39;</span><span class="hl-1"> });</span><br/><span class="hl-4">line</span><span class="hl-1">.</span><span class="hl-0">moveX</span><span class="hl-1">(</span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">4</span><span class="hl-1">, </span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">675</span><span class="hl-1">, </span><span class="hl-2">&#39;cubicOut&#39;</span><span class="hl-1">).</span><span class="hl-0">addNote</span><span class="hl-1">(</span><span class="hl-8">2</span><span class="hl-1">);</span><br/><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">json</span><span class="hl-1"> = </span><span class="hl-4">chart</span><span class="hl-1">.</span><span class="hl-4">data</span><span class="hl-1">; </span><span class="hl-5">// access raw RpeJson</span>
+</code><button type="button">Copy</button></pre>
+            </div>
+          </div>
+        </section>
+        <aside class="tsd-sources">
+          <ul>
+            <li>Defined in prototype.ts:144</li>
+          </ul>
+        </aside>
+        <section class="tsd-panel-group tsd-index-group">
+          <section class="tsd-panel tsd-index-panel">
+            <details class="tsd-index-content tsd-accordion" open>
+              <summary class="tsd-accordion-summary tsd-index-summary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <use href="../assets/icons.svg#icon-chevronDown"></use>
+                </svg>
+                <h5 class="tsd-index-heading uppercase">Index</h5>
+              </summary>
+              <div class="tsd-accordion-details">
+                <section class="tsd-index-section">
+                  <h3 class="tsd-index-heading">Constructors</h3>
+                  <div class="tsd-index-list">
+                    <a href="#constructor" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor">
+                        <use href="../assets/icons.svg#icon-512"></use></svg
+                      ><span>constructor</span></a
+                    >
+                  </div>
+                </section>
+                <section class="tsd-index-section">
+                  <h3 class="tsd-index-heading">Properties</h3>
+                  <div class="tsd-index-list">
+                    <a href="#data" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property">
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
+                      ><span>data</span></a
+                    >
+                  </div>
+                </section>
+                <section class="tsd-index-section">
+                  <h3 class="tsd-index-heading">Accessors</h3>
+                  <div class="tsd-index-list">
+                    <a href="#linecount" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor">
+                        <use href="../assets/icons.svg#icon-262144"></use></svg
+                      ><span>line<wbr />Count</span></a
+                    >
+                  </div>
+                </section>
+                <section class="tsd-index-section">
+                  <h3 class="tsd-index-heading">Methods</h3>
+                  <div class="tsd-index-list">
+                    <a href="#from" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>from</span></a
+                    >
+                    <a href="#empty" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>empty</span></a
+                    >
+                    <a href="#line" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>line</span></a
+                    >
+                    <a href="#getline" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>get<wbr />Line</span></a
+                    >
+                    <a href="#lines" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>lines</span></a
+                    >
+                    <a href="#removeline" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>remove<wbr />Line</span></a
+                    >
+                    <a href="#removebpm" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>remove<wbr />Bpm</span></a
+                    >
+                    <a href="#duplicateline" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>duplicate<wbr />Line</span></a
+                    >
+                    <a href="#setbpm" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Bpm</span></a
+                    >
+                    <a href="#bpm" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>bpm</span></a
+                    >
+                    <a href="#offset" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>offset</span></a
+                    >
+                    <a href="#mirror" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>mirror</span></a
+                    >
+                    <a href="#merge" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>merge</span></a
+                    >
+                    <a href="#notes" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>notes</span></a
+                    >
+                    <a href="#lineiterator" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>line<wbr />Iterator</span></a
+                    >
+                    <a href="#events" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>events</span></a
+                    >
+                    <a href="#setname" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Name</span></a
+                    >
+                    <a href="#setoffset" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Offset</span></a
+                    >
+                    <a href="#setlevel" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Level</span></a
+                    >
+                    <a href="#setcharter" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Charter</span></a
+                    >
+                    <a href="#setcomposer" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Composer</span></a
+                    >
+                    <a href="#setbackground" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Background</span></a
+                    >
+                    <a href="#setsong" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>set<wbr />Song</span></a
+                    >
+                    <a href="#stats" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>stats</span></a
+                    >
+                    <a href="#validate" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>validate</span></a
+                    >
+                    <a href="#serialize" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>serialize</span></a
+                    >
+                    <a href="#rawline" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>raw<wbr />Line</span></a
+                    >
+                    <a href="#addline" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>add<wbr />Line</span></a
+                    >
+                    <a href="#addbpmchange" class="tsd-index-link"
+                      ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>add<wbr />Bpm<wbr />Change</span></a
+                    >
+                  </div>
+                </section>
+              </div>
+            </details>
+          </section>
+        </section>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Constructors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Constructors</h2>
+          </summary>
+          <section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="constructor">
+                <span>constructor</span
+                ><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="constructorchartbuilder">
+                    <span class="tsd-signature-keyword">new</span>
+                    <span class="tsd-kind-constructor-signature">ChartBuilder</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">data</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/types.RpeJson.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >RpeJson</a
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a
+                    ><a
+                      href="#constructorchartbuilder"
+                      aria-label="Permalink"
+                      class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">data</span>:
+                            <a
+                              href="../interfaces/types.RpeJson.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >RpeJson</a
+                            ></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:148</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </section>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Properties">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Properties</h2>
+          </summary>
+          <section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="data">
+                <code class="tsd-tag">Readonly</code><span>data</span
+                ><a href="#data" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">data</span
+                ><span class="tsd-signature-symbol">:</span>
+                <a
+                  href="../interfaces/types.RpeJson.html"
+                  class="tsd-signature-type tsd-kind-interface"
+                  >RpeJson</a
+                >
+              </div>
+              <div class="tsd-comment tsd-typography">
+                <p>The underlying chart data. Direct mutations are fine.</p>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>Defined in prototype.ts:146</li>
+                </ul>
+              </aside>
+            </section>
+          </section>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Accessors">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Accessors</h2>
+          </summary>
+          <section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="linecount">
+                <span>line<wbr />Count</span
+                ><a href="#linecount" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li>
+                  <div class="tsd-signature" id="linecountlinecount">
+                    <span class="tsd-signature-keyword">get</span>
+                    <span class="tsd-kind-get-signature">lineCount</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Number of lines in the chart.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">number</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:348</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </section>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Methods">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Methods</h2>
+          </summary>
+          <section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="from">
+                <code class="tsd-tag">Static</code><span>from</span
+                ><a href="#from" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="from-1">
+                    <span class="tsd-kind-call-signature">from</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">chart</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/types.RpeJson.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >RpeJson</a
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a
+                    ><a href="#from-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Wrap an existing chart object.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">chart</span>:
+                            <a
+                              href="../interfaces/types.RpeJson.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >RpeJson</a
+                            ></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:156</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="empty">
+                <code class="tsd-tag">Static</code><span>empty</span
+                ><a href="#empty" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="empty-1">
+                    <span class="tsd-kind-call-signature">empty</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">bpm</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">,</span>
+                    <span class="tsd-kind-parameter">name</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a
+                    ><a href="#empty-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Create a new empty chart and wrap it.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">bpm</span>:
+                            <span class="tsd-signature-type">number</span
+                            ><span class="tsd-signature-symbol"> = 120</span></span
+                          >
+                          <div class="tsd-comment tsd-typography">
+                            <p>Initial BPM (default: 120).</p>
+                          </div>
+                        </li>
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">name</span>:
+                            <span class="tsd-signature-type">string</span
+                            ><span class="tsd-signature-symbol"> = &#39;Untitled&#39;</span></span
+                          >
+                          <div class="tsd-comment tsd-typography">
+                            <p>Chart name (default: 'Untitled').</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:165</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="line">
+                <span>line</span
+                ><a href="#line" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="line-1">
+                    <span class="tsd-kind-call-signature">line</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">options</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <a
+                      href="../interfaces/chart-utils.CreateLineOptions.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >CreateLineOptions</a
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                      >LineBuilder</a
+                    ><a href="#line-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Add a new line and return its <code>LineBuilder</code>. The
+                        <code>ChartBuilder</code> is accessible via <code>lineBuilder.chart</code>.
+                      </p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">options</span>:
+                            <a
+                              href="../interfaces/chart-utils.CreateLineOptions.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >CreateLineOptions</a
+                            ><span class="tsd-signature-symbol"> = {}</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                        >LineBuilder</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:175</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="getline">
+                <span>get<wbr />Line</span
+                ><a href="#getline" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="getline-1">
+                    <span class="tsd-kind-call-signature">getLine</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">index</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                      >LineBuilder</a
+                    ><a href="#getline-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Get a <code>LineBuilder</code> for an existing line at <code>index</code>.
+                      </p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">index</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                        >LineBuilder</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:183</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="lines">
+                <span>lines</span
+                ><a href="#lines" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="lines-1">
+                    <span class="tsd-kind-call-signature">lines</span
+                    ><span class="tsd-signature-symbol">(</span><br />    <span
+                      class="tsd-kind-parameter"
+                      >count</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">,</span><br />    <span
+                      class="tsd-kind-parameter"
+                      >options</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <a
+                      href="../interfaces/chart-utils.CreateLineOptions.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >CreateLineOptions</a
+                    >
+                    <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol"
+                      >(</span
+                    ><span class="tsd-kind-parameter">i</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span>
+                    <span class="tsd-signature-symbol">=&gt;</span>
+                    <a
+                      href="../interfaces/chart-utils.CreateLineOptions.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >CreateLineOptions</a
+                    >)<span class="tsd-signature-symbol">,</span><br /><span
+                      class="tsd-signature-symbol"
+                      >)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                      >LineBuilder</a
+                    ><span class="tsd-signature-symbol">[]</span
+                    ><a href="#lines-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Add multiple lines at once, returning an array of <code>LineBuilder</code>s.
+                      </p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">count</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">options</span>:
+                            <a
+                              href="../interfaces/chart-utils.CreateLineOptions.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >CreateLineOptions</a
+                            >
+                            <span class="tsd-signature-symbol">|</span> (<span
+                              class="tsd-signature-symbol"
+                              >(</span
+                            ><span class="tsd-kind-parameter">i</span
+                            ><span class="tsd-signature-symbol">:</span>
+                            <span class="tsd-signature-type">number</span
+                            ><span class="tsd-signature-symbol">)</span>
+                            <span class="tsd-signature-symbol">=&gt;</span>
+                            <a
+                              href="../interfaces/chart-utils.CreateLineOptions.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >CreateLineOptions</a
+                            >)<span class="tsd-signature-symbol"> = {}</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                        >LineBuilder</a
+                      ><span class="tsd-signature-symbol">[]</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:193</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="removeline">
+                <span>remove<wbr />Line</span
+                ><a href="#removeline" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="removeline-1">
+                    <span class="tsd-kind-call-signature">removeLine</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">index</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#removeline-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Remove a line by index. Updates parent references automatically.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">index</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:202</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="removebpm">
+                <span>remove<wbr />Bpm</span
+                ><a href="#removebpm" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="removebpm-1">
+                    <span class="tsd-kind-call-signature">removeBpm</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">index</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#removebpm-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Remove a BPM change at the given index (cannot remove index 0).</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">index</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:210</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="duplicateline">
+                <span>duplicate<wbr />Line</span
+                ><a href="#duplicateline" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="duplicateline-1">
+                    <span class="tsd-kind-call-signature">duplicateLine</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">index</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">,</span>
+                    <span class="tsd-kind-parameter">includeNotes</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <span class="tsd-signature-type">boolean</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                      >LineBuilder</a
+                    ><a href="#duplicateline-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Duplicate a line by index and return the new <code>LineBuilder</code>.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">index</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">includeNotes</span>:
+                            <span class="tsd-signature-type">boolean</span
+                            ><span class="tsd-signature-symbol"> = true</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                        >LineBuilder</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:218</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setbpm">
+                <span>set<wbr />Bpm</span
+                ><a href="#setbpm" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setbpm-1">
+                    <span class="tsd-kind-call-signature">setBpm</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">bpm</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setbpm-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Set the chart to a single constant BPM, replacing all existing BPM entries.
+                      </p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">bpm</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:228</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="bpm">
+                <span>bpm</span
+                ><a href="#bpm" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="bpm-1">
+                    <span class="tsd-kind-call-signature">bpm</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">beat</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">,</span>
+                    <span class="tsd-kind-parameter">bpm</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#bpm-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Add a BPM change at <code>beat</code>.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">beat</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">bpm</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:236</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="offset">
+                <span>offset</span
+                ><a href="#offset" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="offset-1">
+                    <span class="tsd-kind-call-signature">offset</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">beatOffset</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#offset-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Offset the entire chart by <code>beatOffset</code> beats.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">beatOffset</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:246</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="mirror">
+                <span>mirror</span
+                ><a href="#mirror" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="mirror-1">
+                    <span class="tsd-kind-call-signature">mirror</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#mirror-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Mirror the entire chart horizontally.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:254</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="merge">
+                <span>merge</span
+                ><a href="#merge" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="merge-1">
+                    <span class="tsd-kind-call-signature">merge</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">source</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/types.RpeJson.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >RpeJson</a
+                    >
+                    <span class="tsd-signature-symbol">|</span>
+                    <a href="" class="tsd-signature-type tsd-kind-class">ChartBuilder</a
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#merge-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Merge all lines from <code>source</code> into this chart.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">source</span>:
+                            <a
+                              href="../interfaces/types.RpeJson.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >RpeJson</a
+                            >
+                            <span class="tsd-signature-symbol">|</span>
+                            <a href="" class="tsd-signature-type tsd-kind-class"
+                              >ChartBuilder</a
+                            ></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:262</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="notes">
+                <span>notes</span
+                ><a href="#notes" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="notes-1">
+                    <span class="tsd-kind-call-signature">notes</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="iterators.NoteIterator.html" class="tsd-signature-type tsd-kind-class"
+                      >NoteIterator</a
+                    ><a href="#notes-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Create a <code>NoteIterator</code> pre-scoped to this chart's notes.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="iterators.NoteIterator.html"
+                        class="tsd-signature-type tsd-kind-class"
+                        >NoteIterator</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:270</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="lineiterator">
+                <span>line<wbr />Iterator</span
+                ><a href="#lineiterator" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="lineiterator-1">
+                    <span class="tsd-kind-call-signature">lineIterator</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="iterators.LineIterator.html" class="tsd-signature-type tsd-kind-class"
+                      >LineIterator</a
+                    ><a href="#lineiterator-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Create a <code>LineIterator</code> pre-scoped to this chart.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="iterators.LineIterator.html"
+                        class="tsd-signature-type tsd-kind-class"
+                        >LineIterator</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:275</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="events">
+                <span>events</span
+                ><a href="#events" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="events-1">
+                    <span class="tsd-kind-call-signature">events</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="iterators.EventIterator.html" class="tsd-signature-type tsd-kind-class"
+                      >EventIterator</a
+                    ><a href="#events-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Create an <code>EventIterator</code> pre-scoped to this chart.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="iterators.EventIterator.html"
+                        class="tsd-signature-type tsd-kind-class"
+                        >EventIterator</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:280</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setname">
+                <span>set<wbr />Name</span
+                ><a href="#setname" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setname-1">
+                    <span class="tsd-kind-call-signature">setName</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">name</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setname-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography"><p>Set the chart name.</p></div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">name</span>:
+                            <span class="tsd-signature-type">string</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:287</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setoffset">
+                <span>set<wbr />Offset</span
+                ><a href="#setoffset" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setoffset-1">
+                    <span class="tsd-kind-call-signature">setOffset</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">offsetMs</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setoffset-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Set the chart offset (in milliseconds).</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">offsetMs</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:293</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setlevel">
+                <span>set<wbr />Level</span
+                ><a href="#setlevel" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setlevel-1">
+                    <span class="tsd-kind-call-signature">setLevel</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">level</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setlevel-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Set the level string (e.g. <code>'SP Lv.15'</code>).</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">level</span>:
+                            <span class="tsd-signature-type">string</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:299</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setcharter">
+                <span>set<wbr />Charter</span
+                ><a href="#setcharter" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setcharter-1">
+                    <span class="tsd-kind-call-signature">setCharter</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">charter</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setcharter-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Set the charter (chart author) name.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">charter</span>:
+                            <span class="tsd-signature-type">string</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:305</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setcomposer">
+                <span>set<wbr />Composer</span
+                ><a href="#setcomposer" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setcomposer-1">
+                    <span class="tsd-kind-call-signature">setComposer</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">composer</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setcomposer-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography"><p>Set the composer name.</p></div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">composer</span>:
+                            <span class="tsd-signature-type">string</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:311</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setbackground">
+                <span>set<wbr />Background</span
+                ><a href="#setbackground" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setbackground-1">
+                    <span class="tsd-kind-call-signature">setBackground</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">background</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setbackground-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Set the background image path.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">background</span>:
+                            <span class="tsd-signature-type">string</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:317</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="setsong">
+                <span>set<wbr />Song</span
+                ><a href="#setsong" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="setsong-1">
+                    <span class="tsd-kind-call-signature">setSong</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">song</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#setsong-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Set the song audio file path.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">song</span>:
+                            <span class="tsd-signature-type">string</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:323</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="stats">
+                <span>stats</span
+                ><a href="#stats" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="stats-1">
+                    <span class="tsd-kind-call-signature">stats</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/chart-utils.ChartStats.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >ChartStats</a
+                    ><a href="#stats-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Compute summary statistics for the chart.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="../interfaces/chart-utils.ChartStats.html"
+                        class="tsd-signature-type tsd-kind-interface"
+                        >ChartStats</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:331</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="validate">
+                <span>validate</span
+                ><a href="#validate" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="validate-1">
+                    <span class="tsd-kind-call-signature">validate</span
+                    ><span class="tsd-signature-symbol">()</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/chart-utils.ValidationIssue.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >ValidationIssue</a
+                    ><span class="tsd-signature-symbol">[]</span
+                    ><a href="#validate-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Validate the chart and return any issues found.</p>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="../interfaces/chart-utils.ValidationIssue.html"
+                        class="tsd-signature-type tsd-kind-interface"
+                        >ValidationIssue</a
+                      ><span class="tsd-signature-symbol">[]</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:336</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="serialize">
+                <span>serialize</span
+                ><a href="#serialize" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="serialize-1">
+                    <span class="tsd-kind-call-signature">serialize</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">pretty</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <span class="tsd-signature-type">boolean</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">string</span
+                    ><a href="#serialize-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Serialize the chart to a JSON string.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">pretty</span>:
+                            <span class="tsd-signature-type">boolean</span
+                            ><span class="tsd-signature-symbol"> = true</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">string</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:343</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="rawline">
+                <span>raw<wbr />Line</span
+                ><a href="#rawline" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="rawline-1">
+                    <span class="tsd-kind-call-signature">rawLine</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">index</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/types.JudgeLine.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >JudgeLine</a
+                    ><a href="#rawline-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>Get the judge line object at <code>index</code> directly.</p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">index</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="../interfaces/types.JudgeLine.html"
+                        class="tsd-signature-type tsd-kind-interface"
+                        >JudgeLine</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:353</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="addline">
+                <span>add<wbr />Line</span
+                ><a href="#addline" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="addline-1">
+                    <span class="tsd-kind-call-signature">addLine</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">options</span
+                    ><span class="tsd-signature-symbol">?:</span>
+                    <a
+                      href="../interfaces/chart-utils.CreateLineOptions.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >CreateLineOptions</a
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                      >LineBuilder</a
+                    ><a href="#addline-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Add a new line and return its <code>LineBuilder</code>. Alias for
+                        <code>.line()</code>.
+                      </p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">options</span>:
+                            <a
+                              href="../interfaces/chart-utils.CreateLineOptions.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >CreateLineOptions</a
+                            ><span class="tsd-signature-symbol"> = {}</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a href="prototype.LineBuilder.html" class="tsd-signature-type tsd-kind-class"
+                        >LineBuilder</a
+                      >
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:365</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="addbpmchange">
+                <span>add<wbr />Bpm<wbr />Change</span
+                ><a href="#addbpmchange" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="addbpmchange-1">
+                    <span class="tsd-kind-call-signature">addBpmChange</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">beat</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">,</span>
+                    <span class="tsd-kind-parameter">bpm</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">number</span
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <span class="tsd-signature-type">this</span
+                    ><a href="#addbpmchange-1" aria-label="Permalink" class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Add a BPM change at <code>beat</code>. Alias for
+                        <code>.bpm(beat, bpm)</code>.
+                      </p>
+                    </div>
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">beat</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">bpm</span>:
+                            <span class="tsd-signature-type">number</span></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns <span class="tsd-signature-type">this</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>Defined in prototype.ts:373</li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </section>
+        </details>
+      </div>
+      <div class="col-sidebar">
+        <div class="page-menu">
+          <div class="tsd-navigation settings">
+            <details class="tsd-accordion">
+              <summary class="tsd-accordion-summary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <use href="../assets/icons.svg#icon-chevronDown"></use>
+                </svg>
+                <h3>Settings</h3>
+              </summary>
+              <div class="tsd-accordion-details">
+                <div class="tsd-filter-visibility">
+                  <span class="settings-label">Member Visibility</span>
+                  <ul id="tsd-filter-options">
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input type="checkbox" id="tsd-filter-protected" name="protected" /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Protected</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input
+                          type="checkbox"
+                          id="tsd-filter-inherited"
+                          name="inherited"
+                          checked
+                        /><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>Inherited</span></label
+                      >
+                    </li>
+                    <li class="tsd-filter-item">
+                      <label class="tsd-filter-input"
+                        ><input type="checkbox" id="tsd-filter-external" name="external" /><svg
+                          width="32"
+                          height="32"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true"
+                        >
+                          <rect
+                            class="tsd-checkbox-background"
+                            width="30"
+                            height="30"
+                            x="1"
+                            y="1"
+                            rx="6"
+                            fill="none"
+                          ></rect>
+                          <path
+                            class="tsd-checkbox-checkmark"
+                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
+                            stroke="none"
+                            stroke-width="3.5"
+                            stroke-linejoin="round"
+                            fill="none"
+                          ></path></svg
+                        ><span>External</span></label
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="tsd-theme-toggle">
+                  <label class="settings-label" for="tsd-theme">Theme</label
+                  ><select id="tsd-theme">
+                    <option value="os">OS</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </div>
+              </div>
+            </details>
+          </div>
+          <details open class="tsd-accordion tsd-page-navigation">
+            <summary class="tsd-accordion-summary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <use href="../assets/icons.svg#icon-chevronDown"></use>
+              </svg>
+              <h3>On This Page</h3>
+            </summary>
+            <div class="tsd-accordion-details">
+              <a href="#factory-methods"><span>Factory methods</span></a
+              ><a href="#methods-summary"><span>Methods summary</span></a>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Constructors">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Constructors
+                </summary>
+                <div>
+                  <a href="#constructor"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor">
+                      <use href="../assets/icons.svg#icon-512"></use></svg
+                    ><span>constructor</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Properties">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Properties
+                </summary>
+                <div>
+                  <a href="#data"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property">
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>data</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Accessors">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Accessors
+                </summary>
+                <div>
+                  <a href="#linecount"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Accessor">
+                      <use href="../assets/icons.svg#icon-262144"></use></svg
+                    ><span>line<wbr />Count</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary class="tsd-accordion-summary" data-key="section-Methods">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Methods
+                </summary>
+                <div>
+                  <a href="#from"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>from</span></a
+                  ><a href="#empty"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>empty</span></a
+                  ><a href="#line"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>line</span></a
+                  ><a href="#getline"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>get<wbr />Line</span></a
+                  ><a href="#lines"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>lines</span></a
+                  ><a href="#removeline"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>remove<wbr />Line</span></a
+                  ><a href="#removebpm"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>remove<wbr />Bpm</span></a
+                  ><a href="#duplicateline"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>duplicate<wbr />Line</span></a
+                  ><a href="#setbpm"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Bpm</span></a
+                  ><a href="#bpm"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>bpm</span></a
+                  ><a href="#offset"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>offset</span></a
+                  ><a href="#mirror"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>mirror</span></a
+                  ><a href="#merge"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>merge</span></a
+                  ><a href="#notes"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>notes</span></a
+                  ><a href="#lineiterator"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>line<wbr />Iterator</span></a
+                  ><a href="#events"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>events</span></a
+                  ><a href="#setname"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Name</span></a
+                  ><a href="#setoffset"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Offset</span></a
+                  ><a href="#setlevel"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Level</span></a
+                  ><a href="#setcharter"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Charter</span></a
+                  ><a href="#setcomposer"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Composer</span></a
+                  ><a href="#setbackground"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Background</span></a
+                  ><a href="#setsong"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>set<wbr />Song</span></a
+                  ><a href="#stats"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>stats</span></a
+                  ><a href="#validate"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>validate</span></a
+                  ><a href="#serialize"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>serialize</span></a
+                  ><a href="#rawline"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>raw<wbr />Line</span></a
+                  ><a href="#addline"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>add<wbr />Line</span></a
+                  ><a href="#addbpmchange"
+                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method">
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>add<wbr />Bpm<wbr />Change</span></a
+                  >
+                </div>
+              </details>
+            </div>
+          </details>
+        </div>
+        <div class="site-menu">
+          <nav class="tsd-navigation">
+            <a href="../modules.html">RPE Chart Utils</a>
+            <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+              <li>Loading...</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p class="tsd-generator">
+        Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a>
+      </p>
+    </footer>
+    <div class="overlay"></div>
+  </body>
+</html>

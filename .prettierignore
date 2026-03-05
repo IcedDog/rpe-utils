@@ -1,0 +1,4 @@
+*
+!*.ts
+!.prettierrc.json
+!package.json

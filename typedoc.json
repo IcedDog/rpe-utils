@@ -1,0 +1,26 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "./utils/chart-utils.ts",
+    "./utils/math.ts",
+    "./utils/easing.ts",
+    "./utils/events.ts",
+    "./utils/position.ts",
+    "./utils/iterators.ts",
+    "./utils/extra.ts",
+    "./utils/prototype.ts",
+    "./utils/types.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "./docs",
+  "name": "RPE Chart Utils",
+  "readme": "./README.md",
+  "includeVersion": false,
+  "categorizeByGroup": true,
+  "searchInComments": true,
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "sort": ["source-order"]
+}
