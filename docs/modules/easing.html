@@ -1,565 +1,159 @@
-<!doctype html>
-<html class="default" lang="en" data-base="../">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>easing | RPE Chart Utils</title>
-    <meta name="description" content="Documentation for RPE Chart Utils" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../assets/style.css" />
-    <link rel="stylesheet" href="../assets/highlight.css" />
-    <script defer src="../assets/main.js"></script>
-    <script async src="../assets/icons.js" id="tsd-icons-script"></script>
-    <script async src="../assets/search.js" id="tsd-search-script"></script>
-    <script async src="../assets/navigation.js" id="tsd-nav-script"></script>
-    <script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script>
-  </head>
-  <body>
-    <script>
-      document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";
-      document.body.style.display = "none";
-      setTimeout(
-        () => (window.app ? app.showPage() : document.body.style.removeProperty("display")),
-        500
-      );
-    </script>
-    <header class="tsd-page-toolbar">
-      <div class="tsd-toolbar-contents container">
-        <a href="../index.html" class="title">RPE Chart Utils</a>
-        <div id="tsd-toolbar-links"></div>
-        <button id="tsd-search-trigger" class="tsd-widget" aria-label="Search">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <use href="../assets/icons.svg#icon-search"></use>
-          </svg>
-        </button>
-        <dialog id="tsd-search" aria-label="Search">
-          <input
-            role="combobox"
-            id="tsd-search-input"
-            aria-controls="tsd-search-results"
-            aria-autocomplete="list"
-            aria-expanded="true"
-            autocapitalize="off"
-            autocomplete="off"
-            placeholder="Search the docs"
-            maxlength="100"
-          />
-          <ul role="listbox" id="tsd-search-results"></ul>
-          <div id="tsd-search-status" aria-live="polite" aria-atomic="true">
-            <div>Preparing search index...</div>
-          </div>
-        </dialog>
-        <a
-          href="#"
-          class="tsd-widget menu"
-          id="tsd-toolbar-menu-trigger"
-          data-toggle="menu"
-          aria-label="Menu"
-          ><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <use href="../assets/icons.svg#icon-menu"></use></svg
-        ></a>
-      </div>
-    </header>
-    <div class="container container-main">
-      <div class="col-content">
-        <div class="tsd-page-title">
-          <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-            <li><a href="" aria-current="page">easing</a></li>
-          </ul>
-          <h1>Module easing</h1>
-        </div>
-        <section class="tsd-panel tsd-comment">
-          <div class="tsd-comment tsd-typography">
-            <p>
-              Complete set of RPE easing functions (28 types) with helpers for evaluation,
-              derivatives, integrals, and bezier curves. Compatible with RPE easingType 1–28.
-            </p>
-            <h2 id="easing-type-reference" class="tsd-anchor-link">
-              Easing type reference<a
-                href="#easing-type-reference"
-                aria-label="Permalink"
-                class="tsd-anchor-icon"
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <use href="../assets/icons.svg#icon-anchor"></use></svg
-              ></a>
-            </h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Direction</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Linear</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>SineOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>SineIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>QuadOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>QuadIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>SineInOut</td>
-                  <td>ease in-out</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>QuadInOut</td>
-                  <td>ease in-out</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>CubicOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>CubicIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>QuartOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>11</td>
-                  <td>QuartIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>CubicInOut</td>
-                  <td>ease in-out</td>
-                </tr>
-                <tr>
-                  <td>13</td>
-                  <td>QuartInOut</td>
-                  <td>ease in-out</td>
-                </tr>
-                <tr>
-                  <td>14</td>
-                  <td>QuintOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>15</td>
-                  <td>QuintIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>16</td>
-                  <td>ExpoOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>17</td>
-                  <td>ExpoIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>18</td>
-                  <td>CircOut</td>
-                  <td>ease out</td>
-                </tr>
-                <tr>
-                  <td>19</td>
-                  <td>CircIn</td>
-                  <td>ease in</td>
-                </tr>
-                <tr>
-                  <td>20</td>
-                  <td>BackOut</td>
-                  <td>ease out (overshoot)</td>
-                </tr>
-                <tr>
-                  <td>21</td>
-                  <td>BackIn</td>
-                  <td>ease in (overshoot)</td>
-                </tr>
-                <tr>
-                  <td>22</td>
-                  <td>CircInOut</td>
-                  <td>ease in-out</td>
-                </tr>
-                <tr>
-                  <td>23</td>
-                  <td>BackInOut</td>
-                  <td>ease in-out (overshoot)</td>
-                </tr>
-                <tr>
-                  <td>24</td>
-                  <td>ElasticOut</td>
-                  <td>ease out (elastic)</td>
-                </tr>
-                <tr>
-                  <td>25</td>
-                  <td>ElasticIn</td>
-                  <td>ease in (elastic)</td>
-                </tr>
-                <tr>
-                  <td>26</td>
-                  <td>ElasticInOut</td>
-                  <td>ease in-out (elastic)</td>
-                </tr>
-                <tr>
-                  <td>27</td>
-                  <td>BounceOut</td>
-                  <td>ease out (bounce)</td>
-                </tr>
-                <tr>
-                  <td>28</td>
-                  <td>BounceIn</td>
-                  <td>ease in (bounce)</td>
-                </tr>
-              </tbody>
-            </table>
-            <h2 id="usage-examples" class="tsd-anchor-link">
-              Usage examples<a href="#usage-examples" aria-label="Permalink" class="tsd-anchor-icon"
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <use href="../assets/icons.svg#icon-anchor"></use></svg
-              ></a>
-            </h2>
-            <pre><code class="ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">easing</span><span class="hl-1">, </span><span class="hl-4">EASING_NAMES</span><span class="hl-1">, </span><span class="hl-4">resolveEasingType</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;./easing&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Evaluate CubicOut at 50% progress</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">v</span><span class="hl-1"> = </span><span class="hl-0">easing</span><span class="hl-1">(</span><span class="hl-8">8</span><span class="hl-1">, </span><span class="hl-8">0.5</span><span class="hl-1">); </span><span class="hl-5">// ~0.875</span><br/><br/><span class="hl-5">// Look up by name</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">t</span><span class="hl-1"> = </span><span class="hl-0">resolveEasingType</span><span class="hl-1">(</span><span class="hl-2">&#39;backOut&#39;</span><span class="hl-1">); </span><span class="hl-5">// 20</span><br/><br/><span class="hl-5">// Use a sub-range [0.2, 0.8] of SineInOut</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">v2</span><span class="hl-1"> = </span><span class="hl-0">easing</span><span class="hl-1">(</span><span class="hl-8">6</span><span class="hl-1">, </span><span class="hl-8">0.5</span><span class="hl-1">, </span><span class="hl-8">0.2</span><span class="hl-1">, </span><span class="hl-8">0.8</span><span class="hl-1">);</span><br/><br/><span class="hl-5">// Custom cubic-bezier (like CSS)</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">v3</span><span class="hl-1"> = </span><span class="hl-0">easing</span><span class="hl-1">(</span><span class="hl-8">1</span><span class="hl-1">, </span><span class="hl-8">0.5</span><span class="hl-1">, </span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">1</span><span class="hl-1">, </span><span class="hl-6">undefined</span><span class="hl-1">, [</span><span class="hl-8">0.4</span><span class="hl-1">, </span><span class="hl-8">0.0</span><span class="hl-1">, </span><span class="hl-8">0.2</span><span class="hl-1">, </span><span class="hl-8">1.0</span><span class="hl-1">]);</span><br/><br/><span class="hl-5">// Resolve an easing name to a number before storing in an event</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">easingType</span><span class="hl-1"> = </span><span class="hl-0">resolveEasingType</span><span class="hl-1">(</span><span class="hl-2">&#39;elasticOut&#39;</span><span class="hl-1">); </span><span class="hl-5">// 24</span>
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>easing | RPE Chart Utils</title><meta name="description" content="Documentation for RPE Chart Utils"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="../index.html" class="title">RPE Chart Utils</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb" aria-label="Breadcrumb"><li><a href="" aria-current="page">easing</a></li></ul><h1>Module easing</h1></div><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><p>Complete set of RPE easing functions (28 types) with helpers for evaluation,
+derivatives, integrals, and bezier curves. Compatible with RPE easingType 1–28.</p>
+<h2 id="easing-type-reference" class="tsd-anchor-link">Easing type reference<a href="#easing-type-reference" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Linear</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SineOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SineIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>4</td>
+<td>QuadOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>5</td>
+<td>QuadIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>6</td>
+<td>SineInOut</td>
+<td>ease in-out</td>
+</tr>
+<tr>
+<td>7</td>
+<td>QuadInOut</td>
+<td>ease in-out</td>
+</tr>
+<tr>
+<td>8</td>
+<td>CubicOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>9</td>
+<td>CubicIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>10</td>
+<td>QuartOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>11</td>
+<td>QuartIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>12</td>
+<td>CubicInOut</td>
+<td>ease in-out</td>
+</tr>
+<tr>
+<td>13</td>
+<td>QuartInOut</td>
+<td>ease in-out</td>
+</tr>
+<tr>
+<td>14</td>
+<td>QuintOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>15</td>
+<td>QuintIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>16</td>
+<td>ExpoOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>17</td>
+<td>ExpoIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>18</td>
+<td>CircOut</td>
+<td>ease out</td>
+</tr>
+<tr>
+<td>19</td>
+<td>CircIn</td>
+<td>ease in</td>
+</tr>
+<tr>
+<td>20</td>
+<td>BackOut</td>
+<td>ease out (overshoot)</td>
+</tr>
+<tr>
+<td>21</td>
+<td>BackIn</td>
+<td>ease in (overshoot)</td>
+</tr>
+<tr>
+<td>22</td>
+<td>CircInOut</td>
+<td>ease in-out</td>
+</tr>
+<tr>
+<td>23</td>
+<td>BackInOut</td>
+<td>ease in-out (overshoot)</td>
+</tr>
+<tr>
+<td>24</td>
+<td>ElasticOut</td>
+<td>ease out (elastic)</td>
+</tr>
+<tr>
+<td>25</td>
+<td>ElasticIn</td>
+<td>ease in (elastic)</td>
+</tr>
+<tr>
+<td>26</td>
+<td>ElasticInOut</td>
+<td>ease in-out (elastic)</td>
+</tr>
+<tr>
+<td>27</td>
+<td>BounceOut</td>
+<td>ease out (bounce)</td>
+</tr>
+<tr>
+<td>28</td>
+<td>BounceIn</td>
+<td>ease in (bounce)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage-examples" class="tsd-anchor-link">Usage examples<a href="#usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">easing</span><span class="hl-1">, </span><span class="hl-4">EASING_NAMES</span><span class="hl-1">, </span><span class="hl-4">resolveEasingType</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;./easing&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Evaluate CubicOut at 50% progress</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">v</span><span class="hl-1"> = </span><span class="hl-0">easing</span><span class="hl-1">(</span><span class="hl-8">8</span><span class="hl-1">, </span><span class="hl-8">0.5</span><span class="hl-1">); </span><span class="hl-5">// ~0.875</span><br/><br/><span class="hl-5">// Look up by name</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">t</span><span class="hl-1"> = </span><span class="hl-0">resolveEasingType</span><span class="hl-1">(</span><span class="hl-2">&#39;backOut&#39;</span><span class="hl-1">); </span><span class="hl-5">// 20</span><br/><br/><span class="hl-5">// Use a sub-range [0.2, 0.8] of SineInOut</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">v2</span><span class="hl-1"> = </span><span class="hl-0">easing</span><span class="hl-1">(</span><span class="hl-8">6</span><span class="hl-1">, </span><span class="hl-8">0.5</span><span class="hl-1">, </span><span class="hl-8">0.2</span><span class="hl-1">, </span><span class="hl-8">0.8</span><span class="hl-1">);</span><br/><br/><span class="hl-5">// Custom cubic-bezier (like CSS)</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">v3</span><span class="hl-1"> = </span><span class="hl-0">easing</span><span class="hl-1">(</span><span class="hl-8">1</span><span class="hl-1">, </span><span class="hl-8">0.5</span><span class="hl-1">, </span><span class="hl-8">0</span><span class="hl-1">, </span><span class="hl-8">1</span><span class="hl-1">, </span><span class="hl-6">undefined</span><span class="hl-1">, [</span><span class="hl-8">0.4</span><span class="hl-1">, </span><span class="hl-8">0.0</span><span class="hl-1">, </span><span class="hl-8">0.2</span><span class="hl-1">, </span><span class="hl-8">1.0</span><span class="hl-1">]);</span><br/><br/><span class="hl-5">// Resolve an easing name to a number before storing in an event</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">easingType</span><span class="hl-1"> = </span><span class="hl-0">resolveEasingType</span><span class="hl-1">(</span><span class="hl-2">&#39;elasticOut&#39;</span><span class="hl-1">); </span><span class="hl-5">// 24</span>
 </code><button type="button">Copy</button></pre>
-          </div>
-        </section>
-        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
-          <summary class="tsd-accordion-summary" data-key="section-Variables">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <use href="../assets/icons.svg#icon-chevronDown"></use>
-            </svg>
-            <h2>Variables</h2>
-          </summary>
-          <dl class="tsd-member-summaries">
-            <dt class="tsd-member-summary" id="easings">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
-                  <use href="../assets/icons.svg#icon-32"></use></svg
-                ><a href="../variables/easing.EASINGS.html">EASINGS</a
-                ><a href="#easings" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="easing_names">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
-                  <use href="../assets/icons.svg#icon-32"></use></svg
-                ><a href="../variables/easing.EASING_NAMES.html">EASING_NAMES</a
-                ><a href="#easing_names" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-          </dl>
-        </details>
-        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
-          <summary class="tsd-accordion-summary" data-key="section-Functions">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <use href="../assets/icons.svg#icon-chevronDown"></use>
-            </svg>
-            <h2>Functions</h2>
-          </summary>
-          <dl class="tsd-member-summaries">
-            <dt class="tsd-member-summary" id="sanitizeeasingparams">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.sanitizeEasingParams.html">sanitizeEasingParams</a
-                ><a href="#sanitizeeasingparams" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="calculateeasingvalue">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.calculateEasingValue.html">calculateEasingValue</a
-                ><a href="#calculateeasingvalue" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="easing">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.easing.html">easing</a
-                ><a href="#easing" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="easingderivative">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.easingDerivative.html">easingDerivative</a
-                ><a href="#easingderivative" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="calculateeasingintegral">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.calculateEasingIntegral.html"
-                  >calculateEasingIntegral</a
-                ><a href="#calculateeasingintegral" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="cubicbezier">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.cubicBezier.html">cubicBezier</a
-                ><a href="#cubicbezier" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-            <dt class="tsd-member-summary" id="resolveeasingtype">
-              <span class="tsd-member-summary-name"
-                ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                  <use href="../assets/icons.svg#icon-64"></use></svg
-                ><a href="../functions/easing.resolveEasingType.html">resolveEasingType</a
-                ><a href="#resolveeasingtype" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg></a
-              ></span>
-            </dt>
-            <dd class="tsd-member-summary"></dd>
-          </dl>
-        </details>
-      </div>
-      <div class="col-sidebar">
-        <div class="page-menu">
-          <div class="tsd-navigation settings">
-            <details class="tsd-accordion">
-              <summary class="tsd-accordion-summary">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <use href="../assets/icons.svg#icon-chevronDown"></use>
-                </svg>
-                <h3>Settings</h3>
-              </summary>
-              <div class="tsd-accordion-details">
-                <div class="tsd-filter-visibility">
-                  <span class="settings-label">Member Visibility</span>
-                  <ul id="tsd-filter-options">
-                    <li class="tsd-filter-item">
-                      <label class="tsd-filter-input"
-                        ><input type="checkbox" id="tsd-filter-protected" name="protected" /><svg
-                          width="32"
-                          height="32"
-                          viewBox="0 0 32 32"
-                          aria-hidden="true"
-                        >
-                          <rect
-                            class="tsd-checkbox-background"
-                            width="30"
-                            height="30"
-                            x="1"
-                            y="1"
-                            rx="6"
-                            fill="none"
-                          ></rect>
-                          <path
-                            class="tsd-checkbox-checkmark"
-                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
-                            stroke="none"
-                            stroke-width="3.5"
-                            stroke-linejoin="round"
-                            fill="none"
-                          ></path></svg
-                        ><span>Protected</span></label
-                      >
-                    </li>
-                    <li class="tsd-filter-item">
-                      <label class="tsd-filter-input"
-                        ><input
-                          type="checkbox"
-                          id="tsd-filter-inherited"
-                          name="inherited"
-                          checked
-                        /><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-                          <rect
-                            class="tsd-checkbox-background"
-                            width="30"
-                            height="30"
-                            x="1"
-                            y="1"
-                            rx="6"
-                            fill="none"
-                          ></rect>
-                          <path
-                            class="tsd-checkbox-checkmark"
-                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
-                            stroke="none"
-                            stroke-width="3.5"
-                            stroke-linejoin="round"
-                            fill="none"
-                          ></path></svg
-                        ><span>Inherited</span></label
-                      >
-                    </li>
-                    <li class="tsd-filter-item">
-                      <label class="tsd-filter-input"
-                        ><input type="checkbox" id="tsd-filter-external" name="external" /><svg
-                          width="32"
-                          height="32"
-                          viewBox="0 0 32 32"
-                          aria-hidden="true"
-                        >
-                          <rect
-                            class="tsd-checkbox-background"
-                            width="30"
-                            height="30"
-                            x="1"
-                            y="1"
-                            rx="6"
-                            fill="none"
-                          ></rect>
-                          <path
-                            class="tsd-checkbox-checkmark"
-                            d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25"
-                            stroke="none"
-                            stroke-width="3.5"
-                            stroke-linejoin="round"
-                            fill="none"
-                          ></path></svg
-                        ><span>External</span></label
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <div class="tsd-theme-toggle">
-                  <label class="settings-label" for="tsd-theme">Theme</label
-                  ><select id="tsd-theme">
-                    <option value="os">OS</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                  </select>
-                </div>
-              </div>
-            </details>
-          </div>
-          <details open class="tsd-accordion tsd-page-navigation">
-            <summary class="tsd-accordion-summary">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <use href="../assets/icons.svg#icon-chevronDown"></use>
-              </svg>
-              <h3>On This Page</h3>
-            </summary>
-            <div class="tsd-accordion-details">
-              <a href="#easing-type-reference"><span>Easing type reference</span></a
-              ><a href="#usage-examples"><span>Usage examples</span></a>
-              <details open class="tsd-accordion tsd-page-navigation-section">
-                <summary class="tsd-accordion-summary" data-key="section-Variables">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
-                  >Variables
-                </summary>
-                <div>
-                  <a href="#easings"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
-                      <use href="../assets/icons.svg#icon-32"></use></svg
-                    ><span>EASINGS</span></a
-                  ><a href="#easing_names"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable">
-                      <use href="../assets/icons.svg#icon-32"></use></svg
-                    ><span>EASING_<wbr />NAMES</span></a
-                  >
-                </div>
-              </details>
-              <details open class="tsd-accordion tsd-page-navigation-section">
-                <summary class="tsd-accordion-summary" data-key="section-Functions">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
-                  >Functions
-                </summary>
-                <div>
-                  <a href="#sanitizeeasingparams"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>sanitize<wbr />Easing<wbr />Params</span></a
-                  ><a href="#calculateeasingvalue"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>calculate<wbr />Easing<wbr />Value</span></a
-                  ><a href="#easing"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>easing</span></a
-                  ><a href="#easingderivative"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>easing<wbr />Derivative</span></a
-                  ><a href="#calculateeasingintegral"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>calculate<wbr />Easing<wbr />Integral</span></a
-                  ><a href="#cubicbezier"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>cubic<wbr />Bezier</span></a
-                  ><a href="#resolveeasingtype"
-                    ><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function">
-                      <use href="../assets/icons.svg#icon-64"></use></svg
-                    ><span>resolve<wbr />Easing<wbr />Type</span></a
-                  >
-                </div>
-              </details>
-            </div>
-          </details>
-        </div>
-        <div class="site-menu">
-          <nav class="tsd-navigation">
-            <a href="../modules.html">RPE Chart Utils</a>
-            <ul class="tsd-small-nested-navigation" id="tsd-nav-container">
-              <li>Loading...</li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <footer>
-      <p class="tsd-generator">
-        Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a>
-      </p>
-    </footer>
-    <div class="overlay"></div>
-  </body>
-</html>
+
+</div></section><details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Variables"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h2>Variables</h2></summary><dl class="tsd-member-summaries"><dt class="tsd-member-summary" id="easings"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable"><use href="../assets/icons.svg#icon-32"></use></svg><a href="../variables/easing.EASINGS.html">EASINGS</a><a href="#easings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="easing_names"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable"><use href="../assets/icons.svg#icon-32"></use></svg><a href="../variables/easing.EASING_NAMES.html">EASING_NAMES</a><a href="#easing_names" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd></dl></details><details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Functions"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h2>Functions</h2></summary><dl class="tsd-member-summaries"><dt class="tsd-member-summary" id="sanitizeeasingparams"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.sanitizeEasingParams.html">sanitizeEasingParams</a><a href="#sanitizeeasingparams" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="calculateeasingvalue"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.calculateEasingValue.html">calculateEasingValue</a><a href="#calculateeasingvalue" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="easing"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.easing.html">easing</a><a href="#easing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="easingderivative"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.easingDerivative.html">easingDerivative</a><a href="#easingderivative" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="calculateeasingintegral"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.calculateEasingIntegral.html">calculateEasingIntegral</a><a href="#calculateeasingintegral" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="cubicbezier"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.cubicBezier.html">cubicBezier</a><a href="#cubicbezier" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd><dt class="tsd-member-summary" id="resolveeasingtype"><span class="tsd-member-summary-name"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><a href="../functions/easing.resolveEasingType.html">resolveEasingType</a><a href="#resolveeasingtype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></span></dt><dd class="tsd-member-summary"></dd></dl></details></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#easing-type-reference"><span>Easing type reference</span></a><a href="#usage-examples"><span>Usage examples</span></a><details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Variables"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Variables</summary><div><a href="#easings"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable"><use href="../assets/icons.svg#icon-32"></use></svg><span>EASINGS</span></a><a href="#easing_names"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Variable"><use href="../assets/icons.svg#icon-32"></use></svg><span>EASING_<wbr/>NAMES</span></a></div></details><details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Functions"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Functions</summary><div><a href="#sanitizeeasingparams"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>sanitize<wbr/>Easing<wbr/>Params</span></a><a href="#calculateeasingvalue"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>calculate<wbr/>Easing<wbr/>Value</span></a><a href="#easing"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>easing</span></a><a href="#easingderivative"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>easing<wbr/>Derivative</span></a><a href="#calculateeasingintegral"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>calculate<wbr/>Easing<wbr/>Integral</span></a><a href="#cubicbezier"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>cubic<wbr/>Bezier</span></a><a href="#resolveeasingtype"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>resolve<wbr/>Easing<wbr/>Type</span></a></div></details></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="../modules.html">RPE Chart Utils</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

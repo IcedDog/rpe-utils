@@ -1,19 +1,36 @@
 {
-  "name": "1",
-  "module": "index.ts",
+  "name": "rpe-utils",
+  "version": "0.1.0",
+  "description": "utilities for manipulating rpe chart files",
   "type": "module",
-  "private": true,
+  "main": "./utils/chart-utils.ts",
+  "exports": {
+    ".": "./utils/chart-utils.ts",
+    "./chart-utils": "./utils/chart-utils.ts",
+    "./easing": "./utils/easing.ts",
+    "./events": "./utils/events.ts",
+    "./extra": "./utils/extra.ts",
+    "./iterators": "./utils/iterators.ts",
+    "./math": "./utils/math.ts",
+    "./position": "./utils/position.ts",
+    "./prototype": "./utils/prototype.ts",
+    "./types": "./utils/types.ts"
+  },
   "scripts": {
+    "init": "bun run init.ts",
     "docs": "typedoc",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "bin": {
+    "rpe-init": "./init.ts"
+  },
   "devDependencies": {
     "@types/bun": "^1.3.9",
-    "prettier": "^3.2.5",
     "typedoc": "^0.28.17"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5",
+    "prettier": "^3.2.5"
   }
 }

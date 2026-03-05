@@ -1,4 +1,7 @@
-*
-!*.ts
-!.prettierrc.json
-!package.json
+node_modules
+INPUT
+OUTPUT
+project
+*.json
+*.yml
+*.yaml
