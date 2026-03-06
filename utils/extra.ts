@@ -584,11 +584,6 @@ export class EffectBuilder {
    *
    * A simple wrapper for `animate()`.
    *
-   * @example
-   * ```ts
-   * effect.animate('posZ', 5, 0.5, { easing: 'cubicOut' });
-   * effect.animate('rotX', 0, Math.PI * 4, { start: 0, end: 16, easing: 'sineInOut' });
-   * ```
    */
   addEffect(
     name: string,
