@@ -117,6 +117,9 @@ import type {
   Extended,
   RpeMeta,
   Beat,
+  EventOptions,
+  SpeedEventOptions,
+  GifEventOptions,
 } from "./types";
 
 import { toBeats, fromBeats, initBpmList, getTimeSec, processEvents, processControlNodes } from "./events";
@@ -966,7 +969,8 @@ export function addInclineEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -974,15 +978,15 @@ export function addInclineEvent(
   if (!line.extended.inclineEvents) line.extended.inclineEvents = [];
 
   const event: Event = {
-    bezier: 0,
-    bezierPoints: [0, 0, 1, 1],
-    easingLeft: 0,
-    easingRight: 1,
+    bezier: options.bezier ?? 0,
+    bezierPoints: options.bezierPoints ?? [0, 0, 1, 1],
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endValue,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startValue,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -1016,7 +1020,8 @@ export function addScaleXEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1024,15 +1029,15 @@ export function addScaleXEvent(
   if (!line.extended.scaleXEvents) line.extended.scaleXEvents = [];
 
   line.extended.scaleXEvents.push({
-    bezier: 0,
-    bezierPoints: [0, 0, 1, 1],
-    easingLeft: 0,
-    easingRight: 1,
+    bezier: options.bezier ?? 0,
+    bezierPoints: options.bezierPoints ?? [0, 0, 1, 1],
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endValue,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startValue,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -1066,7 +1071,8 @@ export function addScaleYEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1074,15 +1080,15 @@ export function addScaleYEvent(
   if (!line.extended.scaleYEvents) line.extended.scaleYEvents = [];
 
   line.extended.scaleYEvents.push({
-    bezier: 0,
-    bezierPoints: [0, 0, 1, 1],
-    easingLeft: 0,
-    easingRight: 1,
+    bezier: options.bezier ?? 0,
+    bezierPoints: options.bezierPoints ?? [0, 0, 1, 1],
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endValue,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startValue,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -1107,7 +1113,8 @@ export function addColorEvent(
   endBeat: number,
   startColor: [number, number, number],
   endColor: [number, number, number],
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1115,15 +1122,15 @@ export function addColorEvent(
   if (!line.extended.colorEvents) line.extended.colorEvents = [];
 
   const event: ColorEvent = {
-    bezier: 0,
-    bezierPoints: [0, 0, 1, 1],
-    easingLeft: 0,
-    easingRight: 1,
+    bezier: options.bezier ?? 0,
+    bezierPoints: options.bezierPoints ?? [0, 0, 1, 1],
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endColor,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startColor,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -1159,7 +1166,8 @@ export function addTextEvent(
   endBeat: number,
   startText: string,
   endText: string,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1167,15 +1175,15 @@ export function addTextEvent(
   if (!line.extended.textEvents) line.extended.textEvents = [];
 
   const event: TextEvent = {
-    bezier: 0,
-    bezierPoints: [0, 0, 1, 1],
-    easingLeft: 0,
-    easingRight: 1,
+    bezier: options.bezier ?? 0,
+    bezierPoints: options.bezierPoints ?? [0, 0, 1, 1],
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endText,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startText,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -1210,7 +1218,8 @@ export function addGifEvent(
   endBeat: number,
   startFrame: number,
   endFrame: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: GifEventOptions = {}
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1222,7 +1231,7 @@ export function addGifEvent(
     end: endFrame,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startFrame,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -1261,11 +1270,12 @@ export function addMoveXEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.moveXEvents) layer.moveXEvents = [];
-  layer.moveXEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType));
+  layer.moveXEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType, options));
 }
 
 /**
@@ -1294,11 +1304,12 @@ export function addMoveYEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.moveYEvents) layer.moveYEvents = [];
-  layer.moveYEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType));
+  layer.moveYEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType, options));
 }
 
 /**
@@ -1331,11 +1342,12 @@ export function addRotateEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.rotateEvents) layer.rotateEvents = [];
-  layer.rotateEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType));
+  layer.rotateEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType, options));
 }
 
 /**
@@ -1369,11 +1381,12 @@ export function addAlphaEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: EventOptions = {}
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.alphaEvents) layer.alphaEvents = [];
-  layer.alphaEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType));
+  layer.alphaEvents.push(makeEvent(startBeat, endBeat, startVal, endVal, easingType, options));
 }
 
 /**
@@ -1409,18 +1422,19 @@ export function addSpeedEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | EasingName = 1
+  easingType: number | EasingName = 1,
+  options: SpeedEventOptions = {}
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.speedEvents) layer.speedEvents = [];
   layer.speedEvents.push({
-    easingLeft: 0,
-    easingRight: 1,
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endVal,
     endTime: fromBeats(endBeat),
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startVal,
     startTime: fromBeats(startBeat),
     startBeat,
@@ -2030,18 +2044,19 @@ function makeEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | EasingName
+  easingType: number | EasingName,
+  options: EventOptions = {}
 ): Event {
   return {
-    bezier: 0,
-    bezierPoints: [0, 0, 1, 1],
-    easingLeft: 0,
-    easingRight: 1,
+    bezier: options.bezier ?? 0,
+    bezierPoints: options.bezierPoints ?? [0, 0, 1, 1],
+    easingLeft: options.easingLeft ?? 0,
+    easingRight: options.easingRight ?? 1,
     easingType: resolveEasingType(easingType),
     end: endVal,
     endTime: fromBeats(endBeat) as Beat,
     endBeat,
-    linkgroup: 0,
+    linkgroup: options.linkgroup ?? 0,
     start: startVal,
     startTime: fromBeats(startBeat) as Beat,
     startBeat,

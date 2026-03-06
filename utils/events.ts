@@ -50,6 +50,8 @@ import type {
   SkewControl,
   YControl,
   VariableEvent,
+  EventOptions,
+  SpeedEventOptions,
 } from "./types";
 import { clamp, lerp } from "./math";
 import {
@@ -601,13 +603,7 @@ export function createEvent(
   start: number,
   end: number,
   easingType: number | EasingName = 1,
-  options: {
-    bezier?: number;
-    bezierPoints?: number[];
-    easingLeft?: number;
-    easingRight?: number;
-    linkgroup?: number;
-  } = {}
+  options: EventOptions = {}
 ): Event {
   const st = typeof startBeat === "number" ? fromBeats(startBeat) : startBeat;
   const et = typeof endBeat === "number" ? fromBeats(endBeat) : endBeat;
@@ -641,7 +637,7 @@ export function createSpeedEvent(
   start: number,
   end: number,
   easingType: number | EasingName = 1,
-  options: { easingLeft?: number; easingRight?: number; linkgroup?: number } = {}
+  options: SpeedEventOptions = {}
 ): SpeedEvent {
   const st = typeof startBeat === "number" ? fromBeats(startBeat) : startBeat;
   const et = typeof endBeat === "number" ? fromBeats(endBeat) : endBeat;
@@ -673,13 +669,7 @@ export function createColorEvent(
   start: [number, number, number],
   end: [number, number, number],
   easingType: number | EasingName = 1,
-  options: {
-    bezier?: number;
-    bezierPoints?: number[];
-    easingLeft?: number;
-    easingRight?: number;
-    linkgroup?: number;
-  } = {}
+  options: EventOptions = {}
 ): ColorEvent {
   const st = typeof startBeat === "number" ? fromBeats(startBeat) : startBeat;
   const et = typeof endBeat === "number" ? fromBeats(endBeat) : endBeat;
@@ -713,13 +703,7 @@ export function createTextEvent(
   start: string,
   end: string,
   easingType: number | EasingName = 1,
-  options: {
-    bezier?: number;
-    bezierPoints?: number[];
-    easingLeft?: number;
-    easingRight?: number;
-    linkgroup?: number;
-  } = {}
+  options: EventOptions = {}
 ): TextEvent {
   const st = typeof startBeat === "number" ? fromBeats(startBeat) : startBeat;
   const et = typeof endBeat === "number" ? fromBeats(endBeat) : endBeat;

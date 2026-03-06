@@ -569,3 +569,44 @@ export interface VectorVariableEvent extends BaseVariableEvent {
   start: number[];
   end: number[];
 }
+
+// ─── Event Mutation Options ─────────────────────────────────────────────────
+
+/**
+ * Optional fields shared by `add*Event` helpers that target
+ * {@link Event}-based channels (moveX, moveY, rotate, alpha,
+ * incline, scaleX, scaleY, color, text).
+ */
+export interface EventOptions {
+  /** Bezier mode: `0` = off (default), `1` = cubic bezier. */
+  bezier?: number;
+  /** Bezier control points `[p1x, p1y, p2x, p2y]` (only used when `bezier = 1`). */
+  bezierPoints?: number[];
+  /** Sub-range start within the easing curve (0–1, default: 0). */
+  easingLeft?: number;
+  /** Sub-range end within the easing curve (0–1, default: 1). */
+  easingRight?: number;
+  /** Link group ID: non-zero values chain adjacent events together. `0` = none. */
+  linkgroup?: number;
+}
+
+/**
+ * Optional fields for {@link addSpeedEvent}.
+ * Speed events do not support bezier easing.
+ */
+export interface SpeedEventOptions {
+  /** Sub-range start within the easing curve (0–1, default: 0). */
+  easingLeft?: number;
+  /** Sub-range end within the easing curve (0–1, default: 1). */
+  easingRight?: number;
+  /** Link group ID (`0` = none). */
+  linkgroup?: number;
+}
+
+/**
+ * Optional fields for {@link addGifEvent}.
+ */
+export interface GifEventOptions {
+  /** Link group ID (`0` = none). */
+  linkgroup?: number;
+}
