@@ -437,8 +437,47 @@ export function cubicBezier(x1: number, y1: number, x2: number, y2: number): (t:
 
 // ─── Human-friendly Easing Names ─────────────────────────────────────────────
 
+/**
+ * Numeric enum of all 28 RPE easing types.
+ *
+ * Use as a type-safe alternative to raw numbers when creating events:
+ * ```ts
+ * createEvent(0, 4, -675, 675, EasingType.CubicOut);
+ * ```
+ */
+export enum EasingType {
+  Linear = 1,
+  SineOut = 2,
+  SineIn = 3,
+  QuadOut = 4,
+  QuadIn = 5,
+  SineInOut = 6,
+  QuadInOut = 7,
+  CubicOut = 8,
+  CubicIn = 9,
+  QuartOut = 10,
+  QuartIn = 11,
+  CubicInOut = 12,
+  QuartInOut = 13,
+  QuintOut = 14,
+  QuintIn = 15,
+  ExpoOut = 16,
+  ExpoIn = 17,
+  CircOut = 18,
+  CircIn = 19,
+  BackOut = 20,
+  BackIn = 21,
+  CircInOut = 22,
+  BackInOut = 23,
+  ElasticOut = 24,
+  ElasticIn = 25,
+  BounceOut = 26,
+  BounceIn = 27,
+  BounceInOut = 28,
+}
+
 /** Map of human-readable easing names to RPE easing type numbers. */
-export const EASING_NAMES: Record<string, number> = {
+export const EASING_NAMES = {
   linear: 1,
   sineOut: 2,
   sineIn: 3,
@@ -467,29 +506,38 @@ export const EASING_NAMES: Record<string, number> = {
   bounceOut: 26,
   bounceIn: 27,
   bounceInOut: 28,
-};
+} as const;
 
 /**
- * Resolve an easing identifier (number or name string) to its RPE type number.
+ * String literal union of all recognized RPE easing name strings.
  *
- * Accepts any of:
- * - An RPE type number 1–28 (returned as-is)
- * - A camelCase easing name from {@link EASING_NAMES} (e.g. `"cubicOut"`, `"elasticIn"`)
+ * @example
+ * ```ts
+ * const e: EasingName = 'cubicOut'; // OK
+ * const e2: EasingName = 'invalid'; // type error
+ * ```
+ */
+export type EasingName = keyof typeof EASING_NAMES;
+
+/**
+ * Resolve an easing identifier (number, {@link EasingType}, or {@link EasingName}) to
+ * its RPE type number (1–28).
  *
  * Returns `1` (linear) for any unrecognised input.
  *
- * @param easingId - An RPE type number (1–28) or a name string.
+ * @param easingId - An RPE type number (1–28), `EasingType` enum value, or `EasingName` string.
  * @returns The RPE easing type number.
  *
  * @example
  * ```ts
- * resolveEasingType(8);           // 8  (CubicOut)
- * resolveEasingType('cubicOut');  // 8
- * resolveEasingType('invalid');   // 1  (falls back to linear)
- * resolveEasingType(0);           // 1  (out of range)
+ * resolveEasingType(EasingType.CubicOut);  // 8
+ * resolveEasingType('cubicOut');           // 8
+ * resolveEasingType(8);                    // 8
+ * resolveEasingType('invalid');            // 1  (falls back to linear)
+ * resolveEasingType(0);                    // 1  (out of range)
  * ```
  */
-export function resolveEasingType(easingId: number | string): number {
+export function resolveEasingType(easingId: number | EasingName): number {
   if (typeof easingId === "number") {
     return easingId >= 1 && easingId <= 28 ? easingId : 1;
   }

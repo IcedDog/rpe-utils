@@ -52,7 +52,7 @@ import type {
   Beat,
 } from "./types";
 import { toBeats, fromBeats } from "./events";
-import { resolveEasingType } from "./easing";
+import { resolveEasingType, type EasingName } from "./easing";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
@@ -273,7 +273,7 @@ export function scalarEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType: number | string = 1,
+  easingType: number | EasingName = 1,
   easingLeft = 0,
   easingRight = 1
 ): ScalarVariableEvent {
@@ -282,7 +282,7 @@ export function scalarEvent(
     startBeat,
     endTime: fromBeats(endBeat),
     endBeat,
-    easingType: typeof easingType === "string" ? resolveEasingType(easingType) : easingType,
+    easingType: resolveEasingType(easingType),
     easingLeft,
     easingRight,
     start: startValue,
@@ -307,7 +307,7 @@ export function vectorEvent(
   endBeat: number,
   startValue: number[],
   endValue: number[],
-  easingType: number | string = 1,
+  easingType: number | EasingName = 1,
   easingLeft = 0,
   easingRight = 1
 ): VectorVariableEvent {
@@ -316,7 +316,7 @@ export function vectorEvent(
     startBeat,
     endTime: fromBeats(endBeat),
     endBeat,
-    easingType: typeof easingType === "string" ? resolveEasingType(easingType) : easingType,
+    easingType: resolveEasingType(easingType),
     easingLeft,
     easingRight,
     start: startValue,
@@ -340,7 +340,7 @@ export function animateValue(
   endBeat: number,
   from: number | number[],
   to: number | number[],
-  easingType: number | string = 2
+  easingType: number | EasingName = 2
 ): AnimatedVariable {
   if (typeof from === "number" && typeof to === "number") {
     return [scalarEvent(startBeat, endBeat, from, to, easingType)];
@@ -385,23 +385,18 @@ export function animateValue(
  * ```
  */
 export function keyframesToAnimatedVariable(
-  keyframes: [number, number | number[], (number | string)?][],
-  easingType: number | string = 2
+  keyframes: [number, number | number[], (number | EasingName)?][],
+  easingType: number | EasingName = 2
 ): AnimatedVariable {
   if (keyframes.length < 2) {
     throw new Error("Need at least 2 keyframes to create an animated variable");
   }
-  const defaultEasing = typeof easingType === "string" ? resolveEasingType(easingType) : easingType;
+  const defaultEasing = resolveEasingType(easingType);
   const events: VariableEvent[] = [];
   for (let i = 0; i < keyframes.length - 1; i++) {
     const [beatA, valA, easingOverride] = keyframes[i]!;
     const [beatB, valB] = keyframes[i + 1]!;
-    const segmentEasing =
-      easingOverride !== undefined
-        ? typeof easingOverride === "string"
-          ? resolveEasingType(easingOverride)
-          : easingOverride
-        : defaultEasing;
+    const segmentEasing = easingOverride !== undefined ? resolveEasingType(easingOverride) : defaultEasing;
     if (typeof valA === "number" && typeof valB === "number") {
       events.push(scalarEvent(beatA, beatB, valA, valB, segmentEasing));
     } else {
@@ -511,8 +506,8 @@ export interface AnimateOptions {
   start?: number;
   /** End beat for the animation (defaults to the effect's own `endBeat`). */
   end?: number;
-  /** Easing: RPE number (1–28) or a named easing string like `'cubicOut'`. Default: 2 (linear). */
-  easing?: number | string;
+  /** Easing: RPE number (1–28), {@link EasingType} enum, or {@link EasingName} string. Default: 2 (linear). */
+  easing?: number | EasingName;
 }
 
 /**
@@ -580,7 +575,7 @@ export class EffectBuilder {
   animate(name: string, from: number | number[], to: number | number[], opts: AnimateOptions = {}): this {
     const start = opts.start ?? this.startBeat;
     const end = opts.end ?? this.endBeat;
-    const easingType = typeof opts.easing === "string" ? resolveEasingType(opts.easing) : (opts.easing ?? 2);
+    const easingType = resolveEasingType(opts.easing ?? 2);
     return this.set(name, animateValue(start, end, from, to, easingType));
   }
 
@@ -602,8 +597,8 @@ export class EffectBuilder {
    */
   keyframes(
     name: string,
-    kfs: [beat: number, value: number | number[], easing?: number | string][],
-    easing: number | string = 2
+    kfs: [beat: number, value: number | number[], easing?: number | EasingName][],
+    easing: number | EasingName = 2
   ): this {
     return this.set(name, keyframesToAnimatedVariable(kfs, easing));
   }
@@ -630,10 +625,10 @@ export class EffectBuilder {
     name: string,
     peakBeat: number,
     peak: number | number[] = 1,
-    opts: { easingIn?: number | string; easingOut?: number | string } = {}
+    opts: { easingIn?: number | EasingName; easingOut?: number | EasingName } = {}
   ): this {
-    const easingIn = typeof opts.easingIn === "string" ? resolveEasingType(opts.easingIn) : (opts.easingIn ?? 2);
-    const easingOut = typeof opts.easingOut === "string" ? resolveEasingType(opts.easingOut) : (opts.easingOut ?? 2);
+    const easingIn = resolveEasingType(opts.easingIn ?? 2);
+    const easingOut = resolveEasingType(opts.easingOut ?? 2);
     return this.set(name, pulseVariable(this.startBeat, peakBeat, this.endBeat, peak, easingIn, easingOut));
   }
 

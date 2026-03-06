@@ -110,7 +110,7 @@ import {
 } from "./chart-utils";
 
 import { toBeats, fromBeats, initBpmList, getTimeSec } from "./events";
-import { resolveEasingType } from "./easing";
+import { resolveEasingType, type EasingName } from "./easing";
 import { noteIterator, lineIterator, eventIterator, NoteIterator, LineIterator, EventIterator } from "./iterators";
 
 // ─── ChartBuilder ─────────────────────────────────────────────────────────────
@@ -1325,10 +1325,10 @@ export class EventBuilder {
    * Set the RPE easing type (1–28) or name (e.g., 'cubicOut').
    * Only applies to non-speed events that support easing.
    */
-  setEasingType(type: number | string): this {
-    const resolved = typeof type === "string" ? resolveEasingType(type) : type;
+  setEasingType(type: number | EasingName): this {
+    const resolved = resolveEasingType(type);
     if (!Number.isInteger(resolved) || resolved < 1 || resolved > 28) {
-      throw new RangeError(`easingType must be an integer 1–28, got ${type} (resolved to ${resolved})`);
+      throw new RangeError(`easingType must be an integer 1–28, got ${String(type)} (resolved to ${resolved})`);
     }
     this.data.easingType = resolved;
     return this;

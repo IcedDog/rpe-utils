@@ -120,7 +120,7 @@ import type {
 } from "./types";
 
 import { toBeats, fromBeats, initBpmList, getTimeSec, processEvents, processControlNodes } from "./events";
-import { resolveEasingType } from "./easing";
+import { resolveEasingType, type EasingName } from "./easing";
 import { deepClone } from "./math";
 
 // ─── Chart Creation ──────────────────────────────────────────────────────────
@@ -966,7 +966,7 @@ export function addInclineEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -978,7 +978,7 @@ export function addInclineEvent(
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endValue,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -1016,7 +1016,7 @@ export function addScaleXEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1028,7 +1028,7 @@ export function addScaleXEvent(
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endValue,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -1066,7 +1066,7 @@ export function addScaleYEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1078,7 +1078,7 @@ export function addScaleYEvent(
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endValue,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -1107,7 +1107,7 @@ export function addColorEvent(
   endBeat: number,
   startColor: [number, number, number],
   endColor: [number, number, number],
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1119,7 +1119,7 @@ export function addColorEvent(
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endColor,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -1159,7 +1159,7 @@ export function addTextEvent(
   endBeat: number,
   startText: string,
   endText: string,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1171,7 +1171,7 @@ export function addTextEvent(
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endText,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -1210,7 +1210,7 @@ export function addGifEvent(
   endBeat: number,
   startFrame: number,
   endFrame: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const line = chart.judgeLineList[lineIndex];
   if (!line) throw new Error(`Line index ${lineIndex} out of range`);
@@ -1218,7 +1218,7 @@ export function addGifEvent(
   if (!line.extended.gifEvents) line.extended.gifEvents = [];
 
   const event: GifEvent = {
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endFrame,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -1261,7 +1261,7 @@ export function addMoveXEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.moveXEvents) layer.moveXEvents = [];
@@ -1294,7 +1294,7 @@ export function addMoveYEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.moveYEvents) layer.moveYEvents = [];
@@ -1331,7 +1331,7 @@ export function addRotateEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.rotateEvents) layer.rotateEvents = [];
@@ -1369,7 +1369,7 @@ export function addAlphaEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.alphaEvents) layer.alphaEvents = [];
@@ -1409,14 +1409,14 @@ export function addSpeedEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType = 1
+  easingType: number | EasingName = 1
 ): void {
   const layer = getOrCreateLayer(chart, lineIndex, layerIndex);
   if (!layer.speedEvents) layer.speedEvents = [];
   layer.speedEvents.push({
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: resolveEasingType(easingType),
     end: endVal,
     endTime: fromBeats(endBeat),
     endBeat,
@@ -2030,14 +2030,14 @@ function makeEvent(
   endBeat: number,
   startVal: number,
   endVal: number,
-  easingType: number | string
+  easingType: number | EasingName
 ): Event {
   return {
     bezier: 0,
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType: typeof easingType === "string" ? resolveEasingType(easingType) : easingType,
+    easingType: resolveEasingType(easingType),
     end: endVal,
     endTime: fromBeats(endBeat) as Beat,
     endBeat,

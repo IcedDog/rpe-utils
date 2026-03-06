@@ -26,7 +26,7 @@
  * fromBeats(2.25); // [2, 1, 4]
  *
  * // Create an event that moves a line from X=-675 to X=675 over beats 0Ⅎ4
- * const ev = createEvent(-675, 675, 0, 4, 'cubicOut');
+ * const ev = createEvent(0, 4, -675, 675, 'cubicOut');
  *
  * // Build keyframe animation: X moves 0→100→0 over beats 0Ⅎ2→4
  * const evs = keyframesToEvents([[0, 0], [2, 100], [4, 0]], 'sineInOut');
@@ -60,6 +60,7 @@ import {
   EASINGS,
   sanitizeEasingParams,
   resolveEasingType,
+  type EasingName,
 } from "./easing";
 
 // ─── Beat / Time Conversion ──────────────────────────────────────────────────
@@ -581,25 +582,25 @@ export function evaluateControl(
  *
  * @example
  * ```ts
- * // Line moves from x=0 to x=675 over beats 0Ⅎ4 with CubicOut easing
- * const ev = createEvent(0, 675, 0, 4, 'cubicOut');
+ * // Line moves from x=0 to x=675 over beats 0–4 with CubicOut easing
+ * const ev = createEvent(0, 4, 0, 675, 'cubicOut');
  *
  * // Use a beat tuple for musical precision (beat 1, 3/8)
- * const ev2 = createEvent(0, 255, [1, 3, 8], [2, 0, 1]);
+ * const ev2 = createEvent([1, 3, 8], [2, 0, 1], 0, 255);
  *
  * // Custom bezier
- * const ev3 = createEvent(0, 1, 0, 4, 1, {
+ * const ev3 = createEvent(0, 4, 0, 1, 1, {
  *   bezier: 1,
  *   bezierPoints: [0.4, 0, 0.2, 1],
  * });
  * ```
  */
 export function createEvent(
-  start: number,
-  end: number,
   startBeat: [number, number, number] | number,
   endBeat: [number, number, number] | number,
-  easingType: number | string = 1,
+  start: number,
+  end: number,
+  easingType: number | EasingName = 1,
   options: {
     bezier?: number;
     bezierPoints?: number[];
@@ -628,18 +629,18 @@ export function createEvent(
 
 /**
  * Create a speed event.
- * @param start - Start speed.
- * @param end - End speed.
  * @param startBeat - Start beat.
  * @param endBeat - End beat.
+ * @param start - Start speed.
+ * @param end - End speed.
  * @param easingType - Easing type. Default: linear.
  */
 export function createSpeedEvent(
-  start: number,
-  end: number,
   startBeat: [number, number, number] | number,
   endBeat: [number, number, number] | number,
-  easingType: number | string = 1,
+  start: number,
+  end: number,
+  easingType: number | EasingName = 1,
   options: { easingLeft?: number; easingRight?: number; linkgroup?: number } = {}
 ): SpeedEvent {
   const st = typeof startBeat === "number" ? fromBeats(startBeat) : startBeat;
@@ -660,18 +661,18 @@ export function createSpeedEvent(
 
 /**
  * Create a color event.
- * @param start - Start color [r, g, b].
- * @param end - End color [r, g, b].
  * @param startBeat - Start beat.
  * @param endBeat - End beat.
+ * @param start - Start color [r, g, b].
+ * @param end - End color [r, g, b].
  * @param easingType - Easing type. Default: linear.
  */
 export function createColorEvent(
-  start: [number, number, number],
-  end: [number, number, number],
   startBeat: [number, number, number] | number,
   endBeat: [number, number, number] | number,
-  easingType: number | string = 1,
+  start: [number, number, number],
+  end: [number, number, number],
+  easingType: number | EasingName = 1,
   options: {
     bezier?: number;
     bezierPoints?: number[];
@@ -700,18 +701,18 @@ export function createColorEvent(
 
 /**
  * Create a text event.
- * @param start - Start text.
- * @param end - End text.
  * @param startBeat - Start beat.
  * @param endBeat - End beat.
+ * @param start - Start text.
+ * @param end - End text.
  * @param easingType - Easing type. Default: linear.
  */
 export function createTextEvent(
-  start: string,
-  end: string,
   startBeat: [number, number, number] | number,
   endBeat: [number, number, number] | number,
-  easingType: number | string = 1,
+  start: string,
+  end: string,
+  easingType: number | EasingName = 1,
   options: {
     bezier?: number;
     bezierPoints?: number[];
@@ -917,7 +918,7 @@ export function keyframesToEvents(keyframes: [number, number][], easingType: num
   const events: Event[] = [];
   for (let i = 0; i < keyframes.length - 1; i++) {
     events.push(
-      createEvent(keyframes[i]![1], keyframes[i + 1]![1], keyframes[i]![0], keyframes[i + 1]![0], easingType)
+      createEvent(keyframes[i]![0], keyframes[i + 1]![0], keyframes[i]![1], keyframes[i + 1]![1], easingType)
     );
   }
   return events;

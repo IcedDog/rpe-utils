@@ -58,7 +58,7 @@
 
 import type { RpeJson, JudgeLine, Note, Event, SpeedEvent, EventLayer } from "./types";
 import { toBeats, fromBeats, getTimeSec, initBpmList } from "./events";
-import { resolveEasingType } from "./easing";
+import { resolveEasingType, type EasingName } from "./easing";
 import { deepClone } from "./math";
 
 /** A predicate function on a Note. */
@@ -935,8 +935,8 @@ export class EventIterator {
   }
 
   /** Set the easing type on all matched events. */
-  setEasing(easingType: number | string): this {
-    const resolved = typeof easingType === "string" ? resolveEasingType(easingType) : easingType;
+  setEasing(easingType: number | EasingName): this {
+    const resolved = resolveEasingType(easingType);
     return this.process((ev) => {
       ev.easingType = resolved;
     });
