@@ -575,8 +575,31 @@ export class EffectBuilder {
   animate(name: string, from: number | number[], to: number | number[], opts: AnimateOptions = {}): this {
     const start = opts.start ?? this.startBeat;
     const end = opts.end ?? this.endBeat;
-    const easingType = resolveEasingType(opts.easing ?? 2);
+    const easingType = resolveEasingType(opts.easing ?? 1);
     return this.set(name, animateValue(start, end, from, to, easingType));
+  }
+
+  /**
+   * Animate a uniform variable from `from` → `to` over `startBeat` → `endBeat`.
+   *
+   * A simple wrapper for `animate()`.
+   *
+   * @example
+   * ```ts
+   * effect.animate('posZ', 5, 0.5, { easing: 'cubicOut' });
+   * effect.animate('rotX', 0, Math.PI * 4, { start: 0, end: 16, easing: 'sineInOut' });
+   * ```
+   */
+  addEffect(
+    name: string,
+    startBeat: number,
+    endBeat: number,
+    from: number | number[],
+    to: number | number[],
+    easing: number | EasingName = 1
+  ): this {
+    const easingType = resolveEasingType(easing);
+    return this.set(name, animateValue(startBeat, endBeat, from, to, easingType));
   }
 
   /**
@@ -598,7 +621,7 @@ export class EffectBuilder {
   keyframes(
     name: string,
     kfs: [beat: number, value: number | number[], easing?: number | EasingName][],
-    easing: number | EasingName = 2
+    easing: number | EasingName = 1
   ): this {
     return this.set(name, keyframesToAnimatedVariable(kfs, easing));
   }
@@ -628,7 +651,7 @@ export class EffectBuilder {
     opts: { easingIn?: number | EasingName; easingOut?: number | EasingName } = {}
   ): this {
     const easingIn = resolveEasingType(opts.easingIn ?? 2);
-    const easingOut = resolveEasingType(opts.easingOut ?? 2);
+    const easingOut = resolveEasingType(opts.easingOut ?? 3);
     return this.set(name, pulseVariable(this.startBeat, peakBeat, this.endBeat, peak, easingIn, easingOut));
   }
 
