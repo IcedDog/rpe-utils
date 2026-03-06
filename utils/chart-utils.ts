@@ -120,6 +120,7 @@ import type {
 } from "./types";
 
 import { toBeats, fromBeats, initBpmList, getTimeSec, processEvents, processControlNodes } from "./events";
+import { resolveEasingType } from "./easing";
 import { deepClone } from "./math";
 
 // ─── Chart Creation ──────────────────────────────────────────────────────────
@@ -2024,13 +2025,19 @@ function getOrCreateLayer(chart: RpeJson, lineIndex: number, layerIndex: number)
 }
 
 /** Create a standard Event with given parameters. */
-function makeEvent(startBeat: number, endBeat: number, startVal: number, endVal: number, easingType: number): Event {
+function makeEvent(
+  startBeat: number,
+  endBeat: number,
+  startVal: number,
+  endVal: number,
+  easingType: number | string
+): Event {
   return {
     bezier: 0,
     bezierPoints: [0, 0, 1, 1],
     easingLeft: 0,
     easingRight: 1,
-    easingType,
+    easingType: typeof easingType === "string" ? resolveEasingType(easingType) : easingType,
     end: endVal,
     endTime: fromBeats(endBeat) as Beat,
     endBeat,

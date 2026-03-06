@@ -257,7 +257,7 @@ export function isBuiltinShader(shader: string): shader is BuiltinShaderName {
  * @param endBeat - Beat where the keyframe ends.
  * @param startValue - Uniform value at `startBeat`.
  * @param endValue - Uniform value at `endBeat`.
- * @param easingType - RPE easing type 1–28 (default: 1 = linear).
+ * @param easingType - RPE easing type (1–28) or name (e.g., 'cubicOut'). Default: 1 (linear).
  * @param easingLeft - Left sub-range boundary (default: 0).
  * @param easingRight - Right sub-range boundary (default: 1).
  * @returns A `ScalarVariableEvent`.
@@ -273,7 +273,7 @@ export function scalarEvent(
   endBeat: number,
   startValue: number,
   endValue: number,
-  easingType = 1,
+  easingType: number | string = 1,
   easingLeft = 0,
   easingRight = 1
 ): ScalarVariableEvent {
@@ -282,7 +282,7 @@ export function scalarEvent(
     startBeat,
     endTime: fromBeats(endBeat),
     endBeat,
-    easingType,
+    easingType: typeof easingType === "string" ? resolveEasingType(easingType) : easingType,
     easingLeft,
     easingRight,
     start: startValue,
@@ -297,7 +297,7 @@ export function scalarEvent(
  * @param endBeat - End beat.
  * @param startValue - Vector value at start.
  * @param endValue - Vector value at end.
- * @param easingType - Easing type (default: 1 = linear).
+ * @param easingType - Easing type or name (default: 1 = linear).
  * @param easingLeft - Easing left trim (default: 0).
  * @param easingRight - Easing right trim (default: 1).
  * @returns A VectorVariableEvent.
@@ -307,7 +307,7 @@ export function vectorEvent(
   endBeat: number,
   startValue: number[],
   endValue: number[],
-  easingType = 1,
+  easingType: number | string = 1,
   easingLeft = 0,
   easingRight = 1
 ): VectorVariableEvent {
@@ -316,7 +316,7 @@ export function vectorEvent(
     startBeat,
     endTime: fromBeats(endBeat),
     endBeat,
-    easingType,
+    easingType: typeof easingType === "string" ? resolveEasingType(easingType) : easingType,
     easingLeft,
     easingRight,
     start: startValue,
@@ -332,7 +332,7 @@ export function vectorEvent(
  * @param endBeat - End beat.
  * @param from - Start value (number or number[]).
  * @param to - End value (number or number[]).
- * @param easingType - Easing type (default: 2 = linear in RPE convention).
+ * @param easingType - Easing type or name (default: 2 = linear in RPE convention).
  * @returns An AnimatedVariable (single-event array).
  */
 export function animateValue(
@@ -340,7 +340,7 @@ export function animateValue(
   endBeat: number,
   from: number | number[],
   to: number | number[],
-  easingType = 2
+  easingType: number | string = 2
 ): AnimatedVariable {
   if (typeof from === "number" && typeof to === "number") {
     return [scalarEvent(startBeat, endBeat, from, to, easingType)];
@@ -351,13 +351,14 @@ export function animateValue(
 }
 
 /**
- * Create a multi-keyframe animated variable from an array of `[beat, value]` pairs.
+ * Create a multi-keyframe animated variable from an array of `[beat, value, easing?]` tuples.
  *
- * Values are interpolated between consecutive keyframes using `easingType`.
+ * Values are interpolated between consecutive keyframes using the specified easing.
+ * If a keyframe has a third element (number or string), it overrides the default easing for the segment starting from that keyframe.
  * Both scalar (`number`) and vector (`number[]`) values are supported.
  *
- * @param keyframes - Sorted array of `[beat, value]` tuples (at least 2 entries).
- * @param easingType - Easing type applied to all segments (default: 2).
+ * @param keyframes - Sorted array of `[beat, value, easing?]` tuples (at least 2 entries).
+ * @param easingType - Default easing type applied to segments without override (default: 2).
  * @returns An `AnimatedVariable`.
  *
  * @example
@@ -369,6 +370,13 @@ export function animateValue(
  *   [8, 0],
  * ]);
  *
+ * // With per-segment easing override
+ * const anim2 = keyframesToAnimatedVariable([
+ *   [0, 0],
+ *   [4, 1, 'cubicOut'],  // Use cubicOut for 0→4
+ *   [8, 0],              // Use default for 4→8
+ * ], 'linear');
+ *
  * // Animate a vec2 color parameter
  * const color = keyframesToAnimatedVariable([
  *   [0, [255, 255, 255]],
@@ -377,21 +385,34 @@ export function animateValue(
  * ```
  */
 export function keyframesToAnimatedVariable(
-  keyframes: [number, number | number[]][],
-  easingType = 2
+  keyframes: [number, number | number[], (number | string)?][],
+  easingType: number | string = 2
 ): AnimatedVariable {
   if (keyframes.length < 2) {
     throw new Error("Need at least 2 keyframes to create an animated variable");
   }
+  const defaultEasing = typeof easingType === "string" ? resolveEasingType(easingType) : easingType;
   const events: VariableEvent[] = [];
   for (let i = 0; i < keyframes.length - 1; i++) {
-    const [beatA, valA] = keyframes[i]!;
+    const [beatA, valA, easingOverride] = keyframes[i]!;
     const [beatB, valB] = keyframes[i + 1]!;
+    const segmentEasing =
+      easingOverride !== undefined
+        ? typeof easingOverride === "string"
+          ? resolveEasingType(easingOverride)
+          : easingOverride
+        : defaultEasing;
     if (typeof valA === "number" && typeof valB === "number") {
-      events.push(scalarEvent(beatA, beatB, valA, valB, easingType));
+      events.push(scalarEvent(beatA, beatB, valA, valB, segmentEasing));
     } else {
       events.push(
-        vectorEvent(beatA, beatB, Array.isArray(valA) ? valA : [valA], Array.isArray(valB) ? valB : [valB], easingType)
+        vectorEvent(
+          beatA,
+          beatB,
+          Array.isArray(valA) ? valA : [valA],
+          Array.isArray(valB) ? valB : [valB],
+          segmentEasing
+        )
       );
     }
   }
@@ -564,24 +585,27 @@ export class EffectBuilder {
   }
 
   /**
-   * Set a multi-keyframe animated variable via `[beat, value]` pairs.
+   * Set a multi-keyframe animated variable via `[beat, value, easing?]` tuples.
    *
    * @param name   - Uniform variable name.
-   * @param kfs    - Sorted `[beat, value]` tuples (at least 2 entries).
-   * @param easing - Easing applied to all segments. Default: 2 (linear).
+   * @param kfs    - Sorted `[beat, value, easing?]` tuples (at least 2 entries). If easing is provided per keyframe, it overrides the default for that segment.
+   * @param easing - Default easing applied to segments without override. Default: 2 (linear).
    *
    * @example
    * ```ts
    * effect.keyframes('rotX', [
    *   [0,  0],
-   *   [16, Math.PI],
-   *   [32, Math.PI * 2],
-   * ], 'cubicOut');
+   *   [16, Math.PI, 'cubicOut'],  // Use cubicOut for 0→16
+   *   [32, Math.PI * 2],          // Use default for 16→32
+   * ], 'linear');
    * ```
    */
-  keyframes(name: string, kfs: [beat: number, value: number | number[]][], easing: number | string = 2): this {
-    const easingType = typeof easing === "string" ? resolveEasingType(easing) : easing;
-    return this.set(name, keyframesToAnimatedVariable(kfs, easingType));
+  keyframes(
+    name: string,
+    kfs: [beat: number, value: number | number[], easing?: number | string][],
+    easing: number | string = 2
+  ): this {
+    return this.set(name, keyframesToAnimatedVariable(kfs, easing));
   }
 
   /**

@@ -58,8 +58,8 @@
 
 import type { RpeJson, JudgeLine, Note, Event, SpeedEvent, EventLayer } from "./types";
 import { toBeats, fromBeats, getTimeSec, initBpmList } from "./events";
-
-// ─── Predicate Types ─────────────────────────────────────────────────────────
+import { resolveEasingType } from "./easing";
+import { deepClone } from "./math";
 
 /** A predicate function on a Note. */
 export type NotePredicate = (
@@ -935,9 +935,10 @@ export class EventIterator {
   }
 
   /** Set the easing type on all matched events. */
-  setEasing(easingType: number): this {
+  setEasing(easingType: number | string): this {
+    const resolved = typeof easingType === "string" ? resolveEasingType(easingType) : easingType;
     return this.process((ev) => {
-      ev.easingType = easingType;
+      ev.easingType = resolved;
     });
   }
 
