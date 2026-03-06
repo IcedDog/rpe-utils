@@ -187,6 +187,10 @@ export function initBpmList(bpmList: Bpm[]): void {
   let lastTimeSec = 0;
   bpmList.forEach((bpm, i) => {
     bpm.startBeat = toBeats(bpm.startTime);
+    // Normalize plain-number startTime to a Beat tuple
+    if (!Array.isArray(bpm.startTime)) {
+      bpm.startTime = fromBeats(bpm.startBeat);
+    }
     bpm.startTimeSec = i === 0 ? lastTimeSec : lastTimeSec + ((bpm.startBeat - lastBeat) / lastBpm) * 60;
     lastBpm = bpm.bpm;
     lastBeat = bpm.startBeat;
@@ -751,12 +755,22 @@ export function createEventLayer(): EventLayer {
 
 /**
  * Sort events by startBeat and compute startBeat/endBeat from time tuples.
+ *
  * @param events - Array of events to process (mutated in place).
  */
 export function processEvents(
   events: (Event | SpeedEvent | ColorEvent | GifEvent | TextEvent)[] | null | undefined
 ): void {
   events?.forEach((event) => {
+    // prevent stupidity
+    if (!Array.isArray(event.startTime)) {
+      if (event.startTime !== event.startBeat) event.startBeat = event.startTime;
+      event.startTime = fromBeats(event.startBeat);
+    }
+    if (!Array.isArray(event.endTime)) {
+      if (event.endTime !== event.endBeat) event.endBeat = event.endTime;
+      event.endTime = fromBeats(event.endBeat);
+    }
     event.startBeat = toBeats(event.startTime);
     event.endBeat = toBeats(event.endTime);
     if (event.endBeat < event.startBeat) event.endBeat = event.startBeat;

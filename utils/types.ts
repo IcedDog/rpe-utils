@@ -226,8 +226,13 @@ export interface Note {
   tint?: [number, number, number] | null;
   /** Hit effect tint color `[r, g, b]`. `null` = default. */
   tintHitEffects?: [number, number, number] | null;
-  /** Judgment hit-box size multiplier (1 = normal). */
+  /** Judgment hit-box size multiplier relative to the default hitbox (1 = normal). RPE standard field. */
   judgeArea: number;
+  /**
+   * Explicit judgment hit-box width override (PhiZone Player extension).
+   * When present, overrides `judgeArea`. Defaults to `size`.
+   */
+  judgeSize?: number;
 }
 
 /** Container for a line's extended event arrays (incline, scale, color, text, GIF). */

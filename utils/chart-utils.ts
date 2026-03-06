@@ -201,14 +201,37 @@ export interface CreateLineOptions {
   bpmfactor?: number;
   /** Z-order for rendering (default: 0). */
   zOrder?: number;
+  /**
+   * Z-index override. When present, overrides `zOrder` for layer ordering.
+   * Supports fractional values for fine-grained control.
+   */
+  zIndex?: number;
   /** Extended events container. */
   extended?: Extended;
-  /** Attach UI */
+  /** Attach UI element to this line. */
   attachUI?: "pause" | "combonumber" | "combo" | "score" | "bar" | "name" | "level" | null;
-  /** Whether the texture is GIF */
+  /** Whether the texture is GIF. */
   isGif?: boolean;
-  /** Whether the line is a masked line */
+  /** Cover mode: `1` = line texture covers notes behind it; `0` = transparent. */
   isCover?: number;
+  /**
+   * Scaling mode applied to notes: `0` = off, `1` = scale x-only, `2` = scale x+y.
+   * Default: 0.
+   */
+  scaleOnNotes?: 0 | 1 | 2;
+  /**
+   * Controls line visibility when a UI component is attached:
+   * `0` = always show, `1` = white colored, `2` = FC/AP colored.
+   * Default: 0.
+   */
+  appearanceOnAttach?: 0 | 1 | 2;
+  /**
+   * Whether speed event easings are integrated to produce height functions.
+   * Default: false for older charts, true for chart version >= 1.7.
+   */
+  integrateSpeedEasings?: boolean;
+  /** Normalized anchor point `[x, y]` for rotation and scaling (default: `[0.5, 0.5]`). */
+  anchor?: [number, number];
 }
 
 /**
@@ -235,10 +258,15 @@ export function getLineOptions(line: JudgeLine, options: Partial<CreateLineOptio
     rotateWithFather: line.rotateWithFather,
     bpmfactor: line.bpmfactor,
     zOrder: line.zOrder,
+    zIndex: line.zIndex,
     extended: line.extended,
     attachUI: line.attachUI,
     isGif: line.isGif,
     isCover: line.isCover,
+    scaleOnNotes: line.scaleOnNotes,
+    appearanceOnAttach: line.appearanceOnAttach,
+    integrateSpeedEasings: line.integrateSpeedEasings,
+    anchor: line.anchor as [number, number] | undefined,
     ...options,
   };
 }
@@ -275,7 +303,10 @@ export function addLine(chart: RpeJson, options: CreateLineOptions = {}, createD
     isCover: options.isCover ?? 1,
     isGif: options.isGif ?? false,
     attachUI: options.attachUI ?? null,
-    anchor: [0.5, 0.5],
+    anchor: options.anchor ?? [0.5, 0.5],
+    scaleOnNotes: options.scaleOnNotes ?? 0,
+    appearanceOnAttach: options.appearanceOnAttach ?? 0,
+    integrateSpeedEasings: options.integrateSpeedEasings,
     numOfNotes: 0,
     notes: [],
     eventLayers: createDefualtEvents ? [createDefaultEventLayer()] : [],
@@ -311,6 +342,8 @@ export function addLine(chart: RpeJson, options: CreateLineOptions = {}, createD
       : [],
     extended: options.extended ?? {},
   };
+
+  if (options.zIndex !== undefined) line.zIndex = options.zIndex;
 
   chart.judgeLineList.push(line);
   return index;
@@ -406,6 +439,14 @@ export interface CreateNoteOptions {
   tint?: [number, number, number] | null;
   /** Hit effect tint [r, g, b]. */
   tintHitEffects?: [number, number, number] | null;
+  /** Judgment hit-box size multiplier (default: 1). */
+  judgeArea?: number;
+  /** Explicit judgment hitbox width override (PhiZone extension). Defaults to `size`. */
+  judgeSize?: number;
+  /** Z-index override for rendering order. */
+  zIndex?: number;
+  /** Z-index for the hit effect sprites. */
+  zIndexHitEffects?: number;
 }
 
 /**
@@ -431,6 +472,10 @@ export function getNoteOptions(note: Note, options: Partial<CreateNoteOptions> =
     endBeat: note.endBeat,
     tint: note.tint,
     tintHitEffects: note.tintHitEffects,
+    judgeArea: note.judgeArea,
+    judgeSize: note.judgeSize,
+    zIndex: note.zIndex,
+    zIndexHitEffects: note.zIndexHitEffects,
     ...options,
   };
 }
@@ -458,12 +503,16 @@ export function getNoteOptions(note: Note, options: Partial<CreateNoteOptions> =
  */
 export function addNote(chart: RpeJson, lineIndex: number, beat: number, options: CreateNoteOptions = {}): number {
   const line = chart.judgeLineList[lineIndex];
-  if (!line) throw new Error(`Line index ${lineIndex} out of range`);
+  if (!line)
+    throw new RangeError(`Line index ${lineIndex} out of range (chart has ${chart.judgeLineList.length} lines)`);
+  if (!isFinite(beat)) throw new TypeError(`beat must be a finite number, got ${beat}`);
   if (!line.notes) line.notes = [];
 
   const startTime = fromBeats(beat);
   const type = options.type ?? 1;
+  if (type < 1 || type > 4) throw new RangeError(`Note type must be 1–4, got ${type}`);
   const endBeat = type === 2 ? (options.endBeat ?? beat + 1) : beat;
+  if (type === 2 && endBeat < beat) throw new RangeError(`Hold endBeat (${endBeat}) must be >= startBeat (${beat})`);
   const endTime = fromBeats(endBeat);
 
   const note: Note = {
@@ -480,12 +529,15 @@ export function addNote(chart: RpeJson, lineIndex: number, beat: number, options
     type,
     visibleTime: options.visibleTime ?? 999999,
     yOffset: options.yOffset ?? 0,
-    judgeArea: 1,
+    judgeArea: options.judgeArea ?? 1,
   };
 
-  if (options.hitsound) note.hitsound = options.hitsound;
-  if (options.tint) note.tint = options.tint;
-  if (options.tintHitEffects) note.tintHitEffects = options.tintHitEffects;
+  if (options.hitsound != null) note.hitsound = options.hitsound;
+  if (options.tint != null) note.tint = options.tint;
+  if (options.tintHitEffects != null) note.tintHitEffects = options.tintHitEffects;
+  if (options.zIndex !== undefined) note.zIndex = options.zIndex;
+  if (options.zIndexHitEffects !== undefined) note.zIndexHitEffects = options.zIndexHitEffects;
+  if (options.judgeSize !== undefined) note.judgeSize = options.judgeSize;
 
   line.notes.push(note);
   line.numOfNotes++;
@@ -1504,6 +1556,13 @@ export function preprocess(chart: RpeJson): RpeJson {
     line.notes?.forEach((note) => {
       note.startBeat = toBeats(note.startTime);
       note.endBeat = toBeats(note.endTime);
+      // Normalize plain-number beats (some charts store beats as raw numbers)
+      if (!Array.isArray(note.startTime)) {
+        note.startTime = fromBeats(note.startBeat);
+      }
+      if (!Array.isArray(note.endTime)) {
+        note.endTime = fromBeats(note.endBeat);
+      }
     });
   }
 

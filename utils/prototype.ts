@@ -55,7 +55,19 @@
  * @module prototype
  */
 
-import type { RpeJson, JudgeLine, Note, Beat, EventLayer, Extended } from "./types";
+import type {
+  RpeJson,
+  JudgeLine,
+  Note,
+  Beat,
+  EventLayer,
+  Extended,
+  Event,
+  SpeedEvent,
+  ColorEvent,
+  TextEvent,
+  GifEvent,
+} from "./types";
 
 import {
   createEmptyChart,
@@ -94,11 +106,11 @@ import {
   type CreateNoteOptions,
   type ChartStats,
   type ValidationIssue,
+  type EventChannel,
 } from "./chart-utils";
 
 import { toBeats, fromBeats, initBpmList, getTimeSec } from "./events";
 import { noteIterator, lineIterator, eventIterator, NoteIterator, LineIterator, EventIterator } from "./iterators";
-import { create } from "domain";
 
 // ─── ChartBuilder ─────────────────────────────────────────────────────────────
 
@@ -669,6 +681,140 @@ export class LineBuilder {
     return this;
   }
 
+  // ── Additional property setters ───────────────────────────────────────────
+
+  /** Set `scaleOnNotes`: 0 = off, 1 = scale x-only, 2 = scale x+y. */
+  setScaleOnNotes(value: 0 | 1 | 2): this {
+    this.data.scaleOnNotes = value;
+    return this;
+  }
+
+  /** Set `appearanceOnAttach`: 0 = always show, 1 = white colored, 2 = FC/AP colored. */
+  setAppearanceOnAttach(value: 0 | 1 | 2): this {
+    this.data.appearanceOnAttach = value;
+    return this;
+  }
+
+  /** Set whether speed event easings are integrated. */
+  setIntegrateSpeedEasings(value: boolean): this {
+    this.data.integrateSpeedEasings = value;
+    return this;
+  }
+
+  /** Set the Z-index override (distinct from `zOrder`). Pass `undefined` to remove it. */
+  setZIndex(z: number | undefined): this {
+    this.data.zIndex = z;
+    return this;
+  }
+
+  /** Set the `attachUI` element. */
+  setAttachUI(ui: JudgeLine["attachUI"]): this {
+    this.data.attachUI = ui;
+    return this;
+  }
+
+  // ── Default (initial) event manipulation ──────────────────────────────────
+
+  /**
+   * Set the constant default value in the first event of the given channel
+   * on the specified event layer (default: layer 0).
+   *
+   * If the layer or channel has no events yet, a constant event spanning
+   * beats 0→1 is created automatically. This is the preferred way to change
+   * the initial state of a line (e.g., starting position, opacity, speed)
+   * without adding a full timing event.
+   *
+   * @param channel - One of `'moveX'`, `'moveY'`, `'rotate'`, `'alpha'`, `'speed'`.
+   * @param value   - The constant value to apply.
+   * @param layerIndex - Event layer index (default: 0).
+   *
+   * @example
+   * ```ts
+   * line.setDefaultValue('moveX', -200); // line starts at X = -200
+   * line.setDefaultValue('alpha', 0);    // line starts invisible
+   * line.setDefaultValue('speed', 5);    // initial note speed = 5
+   * ```
+   */
+  setDefaultValue(channel: EventChannel, value: number, layerIndex = 0): this {
+    // Ensure the layer exists
+    while (this.data.eventLayers.length <= layerIndex) {
+      this.data.eventLayers.push({
+        alphaEvents: [],
+        moveXEvents: [],
+        moveYEvents: [],
+        rotateEvents: [],
+        speedEvents: [],
+      });
+    }
+    const layer = this.data.eventLayers[layerIndex]!;
+    const key = `${channel}Events` as keyof EventLayer;
+    let arr = layer[key] as (Event | SpeedEvent)[] | null | undefined;
+    if (!arr || arr.length === 0) {
+      // Create a minimal constant event
+      const defaultEvent: Event = {
+        bezier: 0,
+        bezierPoints: [0, 0, 1, 1],
+        easingLeft: 0,
+        easingRight: 1,
+        easingType: 1,
+        start: value,
+        end: value,
+        startTime: [0, 0, 1],
+        startBeat: 0,
+        endTime: [1, 0, 1],
+        endBeat: 1,
+        linkgroup: 0,
+      };
+      (layer as Record<string, unknown>)[key] = [defaultEvent];
+    } else {
+      arr[0]!.start = value;
+      (arr[0] as Event).end = value;
+    }
+    return this;
+  }
+
+  /**
+   * Set the default X position (first moveX event in layer 0).
+   * @see setDefaultValue
+   */
+  setDefaultX(value: number, layerIndex = 0): this {
+    return this.setDefaultValue("moveX", value, layerIndex);
+  }
+
+  /**
+   * Set the default Y position (first moveY event in layer 0).
+   * @see setDefaultValue
+   */
+  setDefaultY(value: number, layerIndex = 0): this {
+    return this.setDefaultValue("moveY", value, layerIndex);
+  }
+
+  /**
+   * Set the default rotation angle in degrees (first rotate event in layer 0).
+   * @see setDefaultValue
+   */
+  setDefaultRotation(value: number, layerIndex = 0): this {
+    return this.setDefaultValue("rotate", value, layerIndex);
+  }
+
+  /**
+   * Set the default alpha opacity 0–255 (first alpha event in layer 0).
+   * @see setDefaultValue
+   */
+  setDefaultAlpha(value: number, layerIndex = 0): this {
+    if (value < 0 || value > 255) throw new RangeError(`alpha must be 0–255, got ${value}`);
+    return this.setDefaultValue("alpha", value, layerIndex);
+  }
+
+  /**
+   * Set the default note scroll speed (first speed event in layer 0).
+   * @see setDefaultValue
+   */
+  setDefaultSpeed(value: number, layerIndex = 0): this {
+    if (!isFinite(value)) throw new TypeError(`speed must be a finite number, got ${value}`);
+    return this.setDefaultValue("speed", value, layerIndex);
+  }
+
   // ── Snapshot / Chain Back ─────────────────────────────────────────────────
 
   /**
@@ -751,6 +897,40 @@ export class EventLayerBuilder {
   speed(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
     addSpeedEvent(this.chart, this.lineIndex, this.layerIndex, startBeat, endBeat, from, to, easing);
     return this;
+  }
+
+  // ── Event access ──────────────────────────────────────────────────────────
+
+  /**
+   * Get an `EventBuilder` for a specific event in `channel` at `eventIndex`.
+   *
+   * @example
+   * ```ts
+   * layer.getEvent('moveX', 0).setValue(200).setEasingType(4);
+   * ```
+   */
+  getEvent(channel: EventChannel, eventIndex: number): EventBuilder {
+    return new EventBuilder(this.chart, this.lineIndex, this.layerIndex, channel, eventIndex);
+  }
+
+  /**
+   * Get an `EventBuilder` for the **first** event in `channel`.
+   *
+   * Throws if the channel has no events.
+   *
+   * @example
+   * ```ts
+   * layer.firstEvent('alpha').setValue(128); // make line semi-transparent by default
+   * ```
+   */
+  firstEvent(channel: EventChannel): EventBuilder {
+    const layer = this.data;
+    const key = `${channel}Events` as keyof EventLayer;
+    const arr = layer[key] as (Event | SpeedEvent)[] | null | undefined;
+    if (!arr || arr.length === 0) {
+      throw new RangeError(`Channel '${channel}' has no events on layer ${this.layerIndex}`);
+    }
+    return new EventBuilder(this.chart, this.lineIndex, this.layerIndex, channel, 0);
   }
 
   // ── Navigation ────────────────────────────────────────────────────────────
@@ -886,9 +1066,70 @@ export class NoteBuilder {
     return this;
   }
 
-  /** Set the judge area multiplier. */
+  /** Set the judge area multiplier (RPE standard hitbox multiplier). */
   setJudgeArea(size: number): this {
+    if (!isFinite(size) || size < 0)
+      throw new RangeError(`judgeArea must be a non-negative finite number, got ${size}`);
     this.data.judgeArea = size;
+    return this;
+  }
+
+  /**
+   * Set the explicit judge size (PhiZone Player extension).
+   * Overrides `judgeArea` when present. Pass `undefined` to remove it.
+   */
+  setJudgeSize(size: number | undefined): this {
+    if (size !== undefined && (!isFinite(size) || size < 0)) {
+      throw new RangeError(`judgeSize must be a non-negative finite number, got ${size}`);
+    }
+    this.data.judgeSize = size;
+    return this;
+  }
+
+  /** Set the Z-index rendering override. Pass `undefined` to remove it. */
+  setZIndex(z: number | undefined): this {
+    this.data.zIndex = z;
+    return this;
+  }
+
+  /** Set the Z-index for the hit-effect sprites. Pass `undefined` to remove it. */
+  setZIndexHitEffects(z: number | undefined): this {
+    this.data.zIndexHitEffects = z;
+    return this;
+  }
+
+  /**
+   * Set the note's start beat.
+   * Also shifts the end beat for hold notes if they would become invalid.
+   */
+  setStartBeat(beat: number): this {
+    if (!isFinite(beat)) throw new TypeError(`beat must be a finite number, got ${beat}`);
+    const oldStart = this.data.startBeat;
+    const duration = this.data.endBeat - oldStart;
+    this.data.startTime = fromBeats(beat);
+    this.data.startBeat = beat;
+    if (this.data.type === 2) {
+      const newEnd = beat + Math.max(0, duration);
+      this.data.endTime = fromBeats(newEnd);
+      this.data.endBeat = newEnd;
+    } else {
+      this.data.endTime = fromBeats(beat);
+      this.data.endBeat = beat;
+    }
+    return this;
+  }
+
+  /**
+   * Set the note's end beat (only meaningful for Hold notes, type=2).
+   * Must be >= the note's start beat.
+   */
+  setEndBeat(beat: number): this {
+    if (!isFinite(beat)) throw new TypeError(`beat must be a finite number, got ${beat}`);
+    if (beat < this.data.startBeat) {
+      throw new RangeError(`endBeat (${beat}) must be >= startBeat (${this.data.startBeat})`);
+    }
+    this.data.endTime = fromBeats(beat);
+    this.data.endBeat = beat;
     return this;
   }
 
@@ -960,6 +1201,189 @@ export class NoteBuilder {
   }
 
   /** Navigate back to a `ChartBuilder`. */
+  toChart(): ChartBuilder {
+    return new ChartBuilder(this.chart);
+  }
+}
+
+// ─── EventBuilder ─────────────────────────────────────────────────────────────
+
+/**
+ * Fluent wrapper around a single event inside an `EventLayer` channel.
+ *
+ * Obtain an instance via:
+ * - `EventLayerBuilder.getEvent(channel, index)`
+ * - `EventLayerBuilder.firstEvent(channel)`
+ *
+ * All mutating methods return `this` for chaining. Use `.toLayer()` or
+ * `.toLine()` to navigate back up the hierarchy.
+ *
+ * @example
+ * ```ts
+ * new LineBuilder(chart, 0)
+ *   .getLayer(0)
+ *   .firstEvent('moveX')
+ *   .setValue(100)
+ *   .setEasingType(4);  // cubicIn
+ * ```
+ */
+export class EventBuilder {
+  readonly chart: RpeJson;
+  readonly lineIndex: number;
+  readonly layerIndex: number;
+  readonly channel: EventChannel;
+  readonly eventIndex: number;
+
+  constructor(chart: RpeJson, lineIndex: number, layerIndex: number, channel: EventChannel, eventIndex: number) {
+    const line = chart.judgeLineList[lineIndex];
+    if (!line) throw new RangeError(`Line index ${lineIndex} is out of range`);
+    const layer = line.eventLayers[layerIndex];
+    if (!layer) throw new RangeError(`Layer index ${layerIndex} is out of range on line ${lineIndex}`);
+    const arr = EventBuilder._getChannel(layer, channel);
+    if (!arr || eventIndex < 0 || eventIndex >= arr.length) {
+      throw new RangeError(`Event index ${eventIndex} is out of range in channel '${channel}' on layer ${layerIndex}`);
+    }
+    this.chart = chart;
+    this.lineIndex = lineIndex;
+    this.layerIndex = layerIndex;
+    this.channel = channel;
+    this.eventIndex = eventIndex;
+  }
+
+  /** @internal */
+  private static _getChannel(layer: EventLayer, channel: EventChannel): (Event | SpeedEvent)[] | null | undefined {
+    const key = `${channel}Events` as keyof EventLayer;
+    return layer[key] as (Event | SpeedEvent)[] | null | undefined;
+  }
+
+  /** The raw event data. All mutations apply to the chart directly. */
+  get data(): Event | SpeedEvent {
+    const layer = this.chart.judgeLineList[this.lineIndex]!.eventLayers[this.layerIndex]!;
+    const arr = EventBuilder._getChannel(layer, this.channel);
+    if (!arr || !arr[this.eventIndex]) {
+      throw new RangeError(`Event at index ${this.eventIndex} no longer exists`);
+    }
+    return arr[this.eventIndex]!;
+  }
+
+  // ── Beat setters ──────────────────────────────────────────────────────────
+
+  /**
+   * Set the start beat of this event.
+   * Updates both `startBeat` and `startTime`.
+   */
+  setStartBeat(beat: number): this {
+    if (!isFinite(beat)) throw new TypeError(`beat must be a finite number, got ${beat}`);
+    const ev = this.data;
+    ev.startBeat = beat;
+    ev.startTime = fromBeats(beat);
+    if (ev.endBeat < beat) {
+      ev.endBeat = beat;
+      ev.endTime = fromBeats(beat);
+    }
+    return this;
+  }
+
+  /**
+   * Set the end beat of this event.
+   * Updates both `endBeat` and `endTime`. Must be >= `startBeat`.
+   */
+  setEndBeat(beat: number): this {
+    if (!isFinite(beat)) throw new TypeError(`beat must be a finite number, got ${beat}`);
+    const ev = this.data;
+    if (beat < ev.startBeat) throw new RangeError(`endBeat (${beat}) must be >= startBeat (${ev.startBeat})`);
+    ev.endBeat = beat;
+    ev.endTime = fromBeats(beat);
+    return this;
+  }
+
+  // ── Value setters ─────────────────────────────────────────────────────────
+
+  /** Set the start value of this event. */
+  setStart(value: number): this {
+    (this.data as Event).start = value;
+    return this;
+  }
+
+  /** Set the end value of this event. */
+  setEnd(value: number): this {
+    (this.data as Event).end = value;
+    return this;
+  }
+
+  /** Set both start and end to the same constant value. */
+  setValue(value: number): this {
+    (this.data as Event).start = value;
+    (this.data as Event).end = value;
+    return this;
+  }
+
+  // ── Easing setters ────────────────────────────────────────────────────────
+
+  /**
+   * Set the RPE easing type (1–28).
+   * Only applies to non-speed events that support easing.
+   */
+  setEasingType(type: number): this {
+    if (!Number.isInteger(type) || type < 1 || type > 28) {
+      throw new RangeError(`easingType must be an integer 1–28, got ${type}`);
+    }
+    this.data.easingType = type;
+    return this;
+  }
+
+  /**
+   * Set the easing sub-range `[left, right]` within 0–1.
+   * Shrinks the visible easing window. Not applicable to speed events.
+   */
+  setEasingRange(left: number, right: number): this {
+    if (left < 0 || left > 1 || right < 0 || right > 1 || left > right) {
+      throw new RangeError(`easingLeft/Right must satisfy 0 <= left <= right <= 1`);
+    }
+    const ev = this.data as Event;
+    ev.easingLeft = left;
+    ev.easingRight = right;
+    return this;
+  }
+
+  /**
+   * Enable cubic bezier easing with the given control points.
+   * Points are `[p1x, p1y, p2x, p2y]`, each in [0, 1].
+   */
+  setBezier(p1x: number, p1y: number, p2x: number, p2y: number): this {
+    const ev = this.data as Event;
+    ev.bezier = 1;
+    ev.bezierPoints = [p1x, p1y, p2x, p2y];
+    return this;
+  }
+
+  /** Disable bezier easing (revert to easingType). */
+  clearBezier(): this {
+    const ev = this.data as Event;
+    ev.bezier = 0;
+    ev.bezierPoints = [0, 0, 1, 1];
+    return this;
+  }
+
+  /** Set the link-group ID (0 = no group). */
+  setLinkGroup(id: number): this {
+    this.data.linkgroup = id;
+    return this;
+  }
+
+  // ── Navigation ────────────────────────────────────────────────────────────
+
+  /** Return the `EventLayerBuilder` this event belongs to. */
+  toLayer(): EventLayerBuilder {
+    return new EventLayerBuilder(this.chart, this.lineIndex, this.layerIndex);
+  }
+
+  /** Return the `LineBuilder` for this event's line. */
+  toLine(): LineBuilder {
+    return new LineBuilder(this.chart, this.lineIndex);
+  }
+
+  /** Return a `ChartBuilder`. */
   toChart(): ChartBuilder {
     return new ChartBuilder(this.chart);
   }
