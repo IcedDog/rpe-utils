@@ -67,6 +67,9 @@ import type {
   ColorEvent,
   TextEvent,
   GifEvent,
+  EventOptions,
+  SpeedEventOptions,
+  GifEventOptions,
 } from "./types";
 
 import {
@@ -597,60 +600,121 @@ export class LineBuilder {
    * @param easing    - Easing type (default: 1 = linear).
    * @param index     - Layer index (default: 0).
    */
-  moveX(startBeat: number, endBeat: number, from: number, to: number, easing = 1, index = 0): this {
-    addMoveXEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing);
+  moveX(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    index = 0,
+    options: EventOptions = {}
+  ): this {
+    addMoveXEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   /**
    * Add a moveY event on layer 0.
    */
-  moveY(startBeat: number, endBeat: number, from: number, to: number, easing = 1, index = 0): this {
-    addMoveYEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing);
+  moveY(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    index = 0,
+    options: EventOptions = {}
+  ): this {
+    addMoveYEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   /**
    * Add a rotate event on layer 0.
    */
-  rotate(startBeat: number, endBeat: number, from: number, to: number, easing = 1, index = 0): this {
-    addRotateEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing);
+  rotate(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    index = 0,
+    options: EventOptions = {}
+  ): this {
+    addRotateEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   /**
    * Add an alpha event on layer 0.
    */
-  alpha(startBeat: number, endBeat: number, from: number, to: number, easing = 1, index = 0): this {
-    addAlphaEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing);
+  alpha(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    index = 0,
+    options: EventOptions = {}
+  ): this {
+    addAlphaEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   /**
    * Add a speed event on layer 0.
    */
-  speed(startBeat: number, endBeat: number, from: number, to: number, easing = 1, index = 0): this {
-    addSpeedEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing);
+  speed(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    index = 0,
+    options: SpeedEventOptions = {}
+  ): this {
+    addSpeedEvent(this.chart, this.index, index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   // ── Extended Events ───────────────────────────────────────────────────────
 
   /** Add an incline event. */
-  incline(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addInclineEvent(this.chart, this.index, startBeat, endBeat, from, to, easing);
+  incline(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    options: EventOptions = {}
+  ): this {
+    addInclineEvent(this.chart, this.index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   /** Add a scaleX event. */
-  scaleX(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addScaleXEvent(this.chart, this.index, startBeat, endBeat, from, to, easing);
+  scaleX(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    options: EventOptions = {}
+  ): this {
+    addScaleXEvent(this.chart, this.index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
   /** Add a scaleY event. */
-  scaleY(startBeat: number, endBeat: number, from: number, to: number, easing = 1): this {
-    addScaleYEvent(this.chart, this.index, startBeat, endBeat, from, to, easing);
+  scaleY(
+    startBeat: number,
+    endBeat: number,
+    from: number,
+    to: number,
+    easing: number | EasingName = 1,
+    options: EventOptions = {}
+  ): this {
+    addScaleYEvent(this.chart, this.index, startBeat, endBeat, from, to, easing, options);
     return this;
   }
 
@@ -664,21 +728,36 @@ export class LineBuilder {
     endBeat: number,
     startColor: [number, number, number],
     endColor: [number, number, number],
-    easing = 1
+    easing: number | EasingName = 1,
+    options: EventOptions = {}
   ): this {
-    addColorEvent(this.chart, this.index, startBeat, endBeat, startColor, endColor, easing);
+    addColorEvent(this.chart, this.index, startBeat, endBeat, startColor, endColor, easing, options);
     return this;
   }
 
   /** Add a text event. */
-  text(startBeat: number, endBeat: number, startText: string, endText: string, easing = 1): this {
-    addTextEvent(this.chart, this.index, startBeat, endBeat, startText, endText, easing);
+  text(
+    startBeat: number,
+    endBeat: number,
+    startText: string,
+    endText: string,
+    easing: number | EasingName = 1,
+    options: EventOptions = {}
+  ): this {
+    addTextEvent(this.chart, this.index, startBeat, endBeat, startText, endText, easing, options);
     return this;
   }
 
   /** Add a GIF frame event. */
-  gif(startBeat: number, endBeat: number, startFrame: number, endFrame: number, easing = 1): this {
-    addGifEvent(this.chart, this.index, startBeat, endBeat, startFrame, endFrame, easing);
+  gif(
+    startBeat: number,
+    endBeat: number,
+    startFrame: number,
+    endFrame: number,
+    easing: number | EasingName = 1,
+    options: GifEventOptions = {}
+  ): this {
+    addGifEvent(this.chart, this.index, startBeat, endBeat, startFrame, endFrame, easing, options);
     return this;
   }
 
