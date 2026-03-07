@@ -898,7 +898,7 @@ export function mirrorEventValues(events: (Event | SpeedEvent)[], center = 0): v
  * const alpha = keyframesToEvents([[0, 0], [1, 255], [3, 255], [4, 0]]);
  * ```
  */
-export function keyframesToEvents(keyframes: [number, number][], easingType: number | string = 1): Event[] {
+export function keyframesToEvents(keyframes: [number, number][], easingType: number | EasingName = 1): Event[] {
   const events: Event[] = [];
   for (let i = 0; i < keyframes.length - 1; i++) {
     events.push(

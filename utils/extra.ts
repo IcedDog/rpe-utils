@@ -584,6 +584,21 @@ export class EffectBuilder {
   }
 
   /**
+   * Append events to an animated variable, or create it if it doesn't exist yet.
+   * Unlike `set`, this never overwrites an existing animated variable.
+   */
+  private _appendEvents(name: string, events: AnimatedVariable): this {
+    if (!this.data.vars) this.data.vars = {};
+    const existing = this.data.vars[name];
+    if (isAnimated(existing as Variable)) {
+      (existing as AnimatedVariable).push(...events);
+    } else {
+      this.data.vars[name] = events;
+    }
+    return this;
+  }
+
+  /**
    * Animate a uniform variable from `from` → `to` over a beat range.
    *
    * The beat range defaults to the effect's own `[startBeat, endBeat]`,
@@ -599,7 +614,7 @@ export class EffectBuilder {
     const start = opts.start ?? this.startBeat;
     const end = opts.end ?? this.endBeat;
     const easingType = resolveEasingType(opts.easing ?? 1);
-    return this.set(
+    return this._appendEvents(
       name,
       animateValue(start, end, from, to, easingType, { easingLeft: opts.easingLeft, easingRight: opts.easingRight })
     );
@@ -621,7 +636,7 @@ export class EffectBuilder {
     options: VariableEventOptions = {}
   ): this {
     const easingType = resolveEasingType(easing);
-    return this.set(name, animateValue(startBeat, endBeat, from, to, easingType, options));
+    return this._appendEvents(name, animateValue(startBeat, endBeat, from, to, easingType, options));
   }
 
   /**
@@ -646,7 +661,7 @@ export class EffectBuilder {
     easing: number | EasingName = 1,
     options: VariableEventOptions = {}
   ): this {
-    return this.set(name, keyframesToAnimatedVariable(kfs, easing, options));
+    return this._appendEvents(name, keyframesToAnimatedVariable(kfs, easing, options));
   }
 
   /**
@@ -680,7 +695,7 @@ export class EffectBuilder {
   ): this {
     const easingIn = resolveEasingType(opts.easingIn ?? 2);
     const easingOut = resolveEasingType(opts.easingOut ?? 3);
-    return this.set(
+    return this._appendEvents(
       name,
       pulseVariable(this.startBeat, peakBeat, this.endBeat, peak, easingIn, easingOut, {
         easingLeft: opts.easingLeft,
